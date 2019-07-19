@@ -77,4 +77,8 @@ export class Vector {
     this.y = -this.y
     this.z = -this.z
   }
+
+  normalize() {
+    this.divide(this.length())
+  }
 }

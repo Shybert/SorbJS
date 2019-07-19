@@ -96,4 +96,20 @@ describe('Vector', () => {
     vector.negate()
     expect(vector.equals(new Vector(0.25, -33, -40))).toBeTruthy()
   })
+
+  test('normalize', () => {
+    const vector = new Vector(4, 0, 0)
+    vector.normalize()
+    expect(vector.equals(new Vector(1, 0, 0))).toBeTruthy()
+    expect(vector.length()).toBe(1)
+
+    const vector2 = new Vector(1, 2, 3)
+    vector2.normalize()
+    expect(
+      vector2.equals(
+        new Vector(1 / Math.sqrt(14), 2 / Math.sqrt(14), 3 / Math.sqrt(14))
+      )
+    ).toBeTruthy()
+    expect(vector2.length()).toBeCloseTo(1)
+  })
 })
