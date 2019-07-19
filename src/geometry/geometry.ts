@@ -47,7 +47,6 @@ export class Vector {
       floatingPointEquals(this.z, vector.z)
     )
   }
-
   add(vector: Vector) {
     this.x += vector.x
     this.y += vector.y
@@ -57,5 +56,11 @@ export class Vector {
     this.x -= vector.x
     this.y -= vector.y
     this.z -= vector.z
+  }
+
+  negate() {
+    this.x = -this.x
+    this.y = -this.y
+    this.z = -this.z
   }
 }

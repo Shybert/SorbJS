@@ -70,4 +70,12 @@ describe('Vector', () => {
       expect(vector.equals(new Vector(0.5, 77, 38))).toBeTruthy()
     })
   })
+
+  describe('negate', () => {
+    test('Should negate the vector', () => {
+      const vector = new Vector(-0.25, 33, 40)
+      vector.negate()
+      expect(vector.equals(new Vector(0.25, -33, -40))).toBeTruthy()
+    })
+  })
 })
