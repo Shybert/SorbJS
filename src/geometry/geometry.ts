@@ -62,6 +62,11 @@ export class Vector {
     this.y *= scalar
     this.z *= scalar
   }
+  divide(scalar: number) {
+    this.x /= scalar
+    this.y /= scalar
+    this.z /= scalar
+  }
 
   negate() {
     this.x = -this.x

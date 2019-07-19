@@ -77,6 +77,12 @@ describe('Vector', () => {
     })
   })
 
+  test('divide', () => {
+    const vector = new Vector(1, -2, 3)
+    vector.divide(2)
+    expect(vector.equals(new Vector(0.5, -1, 1.5))).toBeTruthy()
+  })
+
   test('negate', () => {
     const vector = new Vector(-0.25, 33, 40)
     vector.negate()
