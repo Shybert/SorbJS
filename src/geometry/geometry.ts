@@ -23,6 +23,11 @@ export class Point {
     this.y += vector.y
     this.z += vector.z
   }
+  subtract(vector: Vector) {
+    this.x -= vector.x
+    this.y -= vector.y
+    this.z -= vector.z
+  }
 }
 
 export class Vector {
@@ -47,5 +52,10 @@ export class Vector {
     this.x += vector.x
     this.y += vector.y
     this.z += vector.z
+  }
+  subtract(vector: Vector) {
+    this.x -= vector.x
+    this.y -= vector.y
+    this.z -= vector.z
   }
 }

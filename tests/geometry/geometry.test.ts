@@ -26,6 +26,14 @@ describe('Point', () => {
       expect(point.equals(new Point(-1, -11, 42))).toBeTruthy()
     })
   })
+
+  describe('subtract', () => {
+    test('Should be the same as subtracting the corresponding components', () => {
+      const point = new Point(-0.25, 33, 40)
+      point.subtract(new Vector(-0.75, -44, 2))
+      expect(point.equals(new Point(0.5, 77, 38))).toBeTruthy()
+    })
+  })
 })
 
 describe('Vector', () => {
@@ -52,6 +60,14 @@ describe('Vector', () => {
       const vector = new Vector(-0.25, 33, 40)
       vector.add(new Vector(-0.75, -44, 2))
       expect(vector.equals(new Vector(-1, -11, 42))).toBeTruthy()
+    })
+  })
+
+  describe('subtract', () => {
+    test('Should be the same as subtracting the corresponding components', () => {
+      const vector = new Vector(-0.25, 33, 40)
+      vector.subtract(new Vector(-0.75, -44, 2))
+      expect(vector.equals(new Vector(0.5, 77, 38))).toBeTruthy()
     })
   })
 })
