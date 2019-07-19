@@ -17,6 +17,12 @@ export class Point {
       floatingPointEquals(this.z, point.z)
     )
   }
+
+  add(vector: Vector) {
+    this.x += vector.x
+    this.y += vector.y
+    this.z += vector.z
+  }
 }
 
 export class Vector {
@@ -35,5 +41,11 @@ export class Vector {
       floatingPointEquals(this.y, vector.y) &&
       floatingPointEquals(this.z, vector.z)
     )
+  }
+
+  add(vector: Vector) {
+    this.x += vector.x
+    this.y += vector.y
+    this.z += vector.z
   }
 }

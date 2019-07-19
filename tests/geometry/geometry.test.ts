@@ -18,6 +18,14 @@ describe('Point', () => {
       ).toBeFalsy()
     })
   })
+
+  describe('add', () => {
+    test('Should be the same as adding the corresponding components together', () => {
+      const point = new Point(-0.25, 33, 40)
+      point.add(new Vector(-0.75, -44, 2))
+      expect(point.equals(new Point(-1, -11, 42))).toBeTruthy()
+    })
+  })
 })
 
 describe('Vector', () => {
@@ -36,6 +44,14 @@ describe('Vector', () => {
       expect(
         new Vector(1, 5.33, -23).equals(new Vector(1e10, 5.00005, 99.887))
       ).toBeFalsy()
+    })
+  })
+
+  describe('add', () => {
+    test('Should be the same as adding the corresponding components together', () => {
+      const vector = new Vector(-0.25, 33, 40)
+      vector.add(new Vector(-0.75, -44, 2))
+      expect(vector.equals(new Vector(-1, -11, 42))).toBeTruthy()
     })
   })
 })
