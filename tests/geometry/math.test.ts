@@ -1,4 +1,4 @@
-import { vectorBetween, dot } from '../../src/geometry/math'
+import { vectorBetween, dot, cross } from '../../src/geometry/math'
 import { Point, Vector } from '../../src/geometry/geometry'
 
 describe('vectorBetween', () => {
@@ -10,4 +10,11 @@ describe('vectorBetween', () => {
 
 test('dot', () => {
   expect(dot(new Vector(1, 2, 3), new Vector(2, 3, 4))).toBe(20)
+})
+
+test('cross', () => {
+  const vector1 = new Vector(1, 2, 3)
+  const vector2 = new Vector(2, 3, 4)
+  expect(cross(vector1, vector2).equals(new Vector(-1, 2, -1))).toBeTruthy()
+  expect(cross(vector2, vector1).equals(new Vector(1, -2, 1))).toBeTruthy()
 })
