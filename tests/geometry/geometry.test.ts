@@ -33,6 +33,14 @@ describe('Point', () => {
 })
 
 describe('Vector', () => {
+  test('length', () => {
+    expect(new Vector(1, 0, 0).length()).toBe(1)
+    expect(new Vector(0, 1, 0).length()).toBe(1)
+    expect(new Vector(0, 0, 1).length()).toBe(1)
+    expect(new Vector(1, 2, 3).length()).toBeCloseTo(Math.sqrt(14))
+    expect(new Vector(-1, -2, -3).length()).toBeCloseTo(Math.sqrt(14))
+  })
+
   describe('equals', () => {
     test('Should return true for equal vectors', () => {
       expect(new Vector(1, 5, -23).equals(new Vector(1, 5, -23))).toBeTruthy()

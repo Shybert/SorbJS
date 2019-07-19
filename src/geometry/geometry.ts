@@ -40,6 +40,10 @@ export class Vector {
     this.z = z
   }
 
+  length(): number {
+    return Math.sqrt(this.x ** 2 + this.y ** 2 + this.z ** 2)
+  }
+
   equals(vector: Vector) {
     return (
       floatingPointEquals(this.x, vector.x) &&
