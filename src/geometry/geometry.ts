@@ -57,6 +57,11 @@ export class Vector {
     this.y -= vector.y
     this.z -= vector.z
   }
+  multiplyScalar(scalar: number) {
+    this.x *= scalar
+    this.y *= scalar
+    this.z *= scalar
+  }
 
   negate() {
     this.x = -this.x

@@ -63,6 +63,20 @@ describe('Vector', () => {
     expect(vector.equals(new Vector(0.5, 77, 38))).toBeTruthy()
   })
 
+  describe('multiplyScalar', () => {
+    test('By a scalar', () => {
+      const vector = new Vector(1, -2, 3)
+      vector.multiplyScalar(3.5)
+      expect(vector.equals(new Vector(3.5, -7, 10.5))).toBeTruthy()
+    })
+
+    test('By a fraction', () => {
+      const vector = new Vector(1, -2, 3)
+      vector.multiplyScalar(0.5)
+      expect(vector.equals(new Vector(0.5, -1, 1.5))).toBeTruthy()
+    })
+  })
+
   test('negate', () => {
     const vector = new Vector(-0.25, 33, 40)
     vector.negate()
