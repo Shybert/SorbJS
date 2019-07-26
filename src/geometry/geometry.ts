@@ -10,6 +10,10 @@ export class Point {
     this.z = z
   }
 
+  toText(): string {
+    return `(${this.x}, ${this.y}, ${this.z})`
+  }
+
   equals(point: Point) {
     return (
       floatingPointEquals(this.x, point.x) &&

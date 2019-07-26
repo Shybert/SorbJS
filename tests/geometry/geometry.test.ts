@@ -1,6 +1,11 @@
 import { Point, Vector } from '../../src/geometry/geometry'
 
 describe('Point', () => {
+  test('toText', () => {
+    expect(new Point(1, 2, 3).toText()).toEqual('(1, 2, 3)')
+    expect(new Point(-37, 2.557, 1e5).toText()).toEqual('(-37, 2.557, 100000)')
+  })
+
   describe('equals', () => {
     test('Should return true for equal points', () => {
       expect(new Point(1, 5, -23).equals(new Point(1, 5, -23))).toBeTruthy()
