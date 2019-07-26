@@ -72,54 +72,52 @@ describe('Vector', () => {
   test('add', () => {
     const vector = new Vector(-0.25, 33, 40)
     vector.add(new Vector(-0.75, -44, 2))
-    expect(vector.equals(new Vector(-1, -11, 42))).toBeTruthy()
+    expect(vector).toEqualVector(new Vector(-1, -11, 42))
   })
 
   test('subtract', () => {
     const vector = new Vector(-0.25, 33, 40)
     vector.subtract(new Vector(-0.75, -44, 2))
-    expect(vector.equals(new Vector(0.5, 77, 38))).toBeTruthy()
+    expect(vector).toEqualVector(new Vector(0.5, 77, 38))
   })
 
   describe('multiplyScalar', () => {
     test('By a scalar', () => {
       const vector = new Vector(1, -2, 3)
       vector.multiplyScalar(3.5)
-      expect(vector.equals(new Vector(3.5, -7, 10.5))).toBeTruthy()
+      expect(vector).toEqualVector(new Vector(3.5, -7, 10.5))
     })
 
     test('By a fraction', () => {
       const vector = new Vector(1, -2, 3)
       vector.multiplyScalar(0.5)
-      expect(vector.equals(new Vector(0.5, -1, 1.5))).toBeTruthy()
+      expect(vector).toEqualVector(new Vector(0.5, -1, 1.5))
     })
   })
 
   test('divide', () => {
     const vector = new Vector(1, -2, 3)
     vector.divide(2)
-    expect(vector.equals(new Vector(0.5, -1, 1.5))).toBeTruthy()
+    expect(vector).toEqualVector(new Vector(0.5, -1, 1.5))
   })
 
   test('negate', () => {
     const vector = new Vector(-0.25, 33, 40)
     vector.negate()
-    expect(vector.equals(new Vector(0.25, -33, -40))).toBeTruthy()
+    expect(vector).toEqualVector(new Vector(0.25, -33, -40))
   })
 
   test('normalize', () => {
     const vector = new Vector(4, 0, 0)
     vector.normalize()
-    expect(vector.equals(new Vector(1, 0, 0))).toBeTruthy()
+    expect(vector).toEqualVector(new Vector(1, 0, 0))
     expect(vector.length()).toBe(1)
 
     const vector2 = new Vector(1, 2, 3)
     vector2.normalize()
-    expect(
-      vector2.equals(
-        new Vector(1 / Math.sqrt(14), 2 / Math.sqrt(14), 3 / Math.sqrt(14))
-      )
-    ).toBeTruthy()
+    expect(vector2).toEqualVector(
+      new Vector(1 / Math.sqrt(14), 2 / Math.sqrt(14), 3 / Math.sqrt(14))
+    )
     expect(vector2.length()).toBeCloseTo(1)
   })
 })
