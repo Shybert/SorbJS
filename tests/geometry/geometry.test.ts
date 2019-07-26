@@ -81,18 +81,13 @@ describe('Vector', () => {
     expect(vector).toEqualVector(new Vector(0.5, 77, 38))
   })
 
-  describe('multiplyScalar', () => {
-    test('By a scalar', () => {
-      const vector = new Vector(1, -2, 3)
-      vector.multiplyScalar(3.5)
-      expect(vector).toEqualVector(new Vector(3.5, -7, 10.5))
-    })
+  test('multiply', () => {
+    const vector = new Vector(1, -2, 3)
+    vector.multiply(3.5)
+    expect(vector).toEqualVector(new Vector(3.5, -7, 10.5))
 
-    test('By a fraction', () => {
-      const vector = new Vector(1, -2, 3)
-      vector.multiplyScalar(0.5)
-      expect(vector).toEqualVector(new Vector(0.5, -1, 1.5))
-    })
+    vector.multiply(0.5)
+    expect(vector).toEqualVector(new Vector(1.75, -3.5, 5.25))
   })
 
   test('divide', () => {
