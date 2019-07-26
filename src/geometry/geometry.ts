@@ -40,6 +40,10 @@ export class Vector {
     this.z = z
   }
 
+  toText(): string {
+    return `[${this.x}, ${this.y}, ${this.z}]`
+  }
+
   length(): number {
     return Math.sqrt(this.x ** 2 + this.y ** 2 + this.z ** 2)
   }

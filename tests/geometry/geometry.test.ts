@@ -33,6 +33,11 @@ describe('Point', () => {
 })
 
 describe('Vector', () => {
+  test('toText', () => {
+    expect(new Vector(1, 2, 3).toText()).toEqual('[1, 2, 3]')
+    expect(new Vector(-37, 2.557, 1e5).toText()).toEqual('[-37, 2.557, 100000]')
+  })
+
   test('length', () => {
     expect(new Vector(1, 0, 0).length()).toBe(1)
     expect(new Vector(0, 1, 0).length()).toBe(1)
