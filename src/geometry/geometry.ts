@@ -1,4 +1,4 @@
-import { floatingPointEquals } from '../utils'
+import { almostEquals } from '../utils'
 
 export class Point {
   x: number
@@ -16,9 +16,9 @@ export class Point {
 
   equals(point: Point) {
     return (
-      floatingPointEquals(this.x, point.x) &&
-      floatingPointEquals(this.y, point.y) &&
-      floatingPointEquals(this.z, point.z)
+      almostEquals(this.x, point.x) &&
+      almostEquals(this.y, point.y) &&
+      almostEquals(this.z, point.z)
     )
   }
 
@@ -54,9 +54,9 @@ export class Vector {
 
   equals(vector: Vector) {
     return (
-      floatingPointEquals(this.x, vector.x) &&
-      floatingPointEquals(this.y, vector.y) &&
-      floatingPointEquals(this.z, vector.z)
+      almostEquals(this.x, vector.x) &&
+      almostEquals(this.y, vector.y) &&
+      almostEquals(this.z, vector.z)
     )
   }
   add(vector: Vector) {

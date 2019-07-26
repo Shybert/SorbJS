@@ -1,3 +1,3 @@
-export function floatingPointEquals(a: number, b: number) {
+export function almostEquals(a: number, b: number) {
   return Math.abs(a - b) < 0.00001
 }
