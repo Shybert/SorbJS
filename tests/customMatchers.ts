@@ -1,4 +1,4 @@
-import { Vector, Point } from '../src/geometry/geometry'
+import { Vector, Point } from '~geometry/geometry'
 
 declare global {
   namespace jest {

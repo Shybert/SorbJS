@@ -1,4 +1,4 @@
-import { Point, Vector } from './geometry'
+import { Point, Vector } from '~geometry/geometry'
 
 export function vectorBetween(point1: Point, point2: Point): Vector {
   return new Vector(

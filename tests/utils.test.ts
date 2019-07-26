@@ -1,4 +1,4 @@
-import { almostEquals } from '../src/utils'
+import { almostEquals } from '~utils'
 
 describe('almostEquals', () => {
   test('Should return true for equal numbers', () => {
