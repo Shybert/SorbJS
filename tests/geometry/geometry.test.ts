@@ -8,12 +8,11 @@ describe('Point', () => {
 
   describe('equals', () => {
     test('Should return true for equal points', () => {
-      expect(new Point(1, 5, -23).equals(new Point(1, 5, -23))).toBeTruthy()
       expect(
-        new Point(-23.5, 0.003, 5.33).equals(new Point(-23.5, 0.003, 5.33))
+        new Point(1, 5.25, -23).equals(new Point(1, 5.25, -23))
       ).toBeTruthy()
       expect(
-        new Point(1e7, 0.00000003, -0).equals(new Point(1e7, 0.00000003, -0))
+        new Point(1e5, 0.003, -5.33).equals(new Point(1e5, 0.003, -5.33))
       ).toBeTruthy()
     })
 
@@ -53,12 +52,11 @@ describe('Vector', () => {
 
   describe('equals', () => {
     test('Should return true for equal vectors', () => {
-      expect(new Vector(1, 5, -23).equals(new Vector(1, 5, -23))).toBeTruthy()
       expect(
-        new Vector(-23.5, 0.003, 5.33).equals(new Vector(-23.5, 0.003, 5.33))
+        new Vector(1, 5.25, -23).equals(new Vector(1, 5.25, -23))
       ).toBeTruthy()
       expect(
-        new Vector(1e7, 0.00000003, -0).equals(new Vector(1e7, 0.00000003, -0))
+        new Vector(1e5, 0.003, -5.33).equals(new Vector(1e5, 0.003, -5.33))
       ).toBeTruthy()
     })
 
