@@ -26,13 +26,13 @@ describe('Point', () => {
   test('add', () => {
     const point = new Point(-0.25, 33, 40)
     point.add(new Vector(-0.75, -44, 2))
-    expect(point.equals(new Point(-1, -11, 42))).toBeTruthy()
+    expect(point).toEqualPoint(new Point(-1, -11, 42))
   })
 
   test('subtract', () => {
     const point = new Point(-0.25, 33, 40)
     point.subtract(new Vector(-0.75, -44, 2))
-    expect(point.equals(new Point(0.5, 77, 38))).toBeTruthy()
+    expect(point).toEqualPoint(new Point(0.5, 77, 38))
   })
 })
 
