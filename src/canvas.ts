@@ -1,3 +1,5 @@
+import { almostEquals } from '~utils'
+
 export class Color {
   r: number
   g: number
@@ -10,5 +12,13 @@ export class Color {
 
   toText(): string {
     return `(${this.r}, ${this.g}, ${this.b})`
+  }
+
+  equals(color: Color) {
+    return (
+      almostEquals(this.r, color.r) &&
+      almostEquals(this.g, color.g) &&
+      almostEquals(this.b, color.b)
+    )
   }
 }
