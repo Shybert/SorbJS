@@ -1,4 +1,4 @@
-import { Color } from '~canvas'
+import { Color, Canvas } from '~canvas'
 
 describe('Color', () => {
   test('toText', () => {
@@ -20,6 +20,20 @@ describe('Color', () => {
       expect(
         new Color(1, 5.33, -23).equals(new Color(1e10, 5.00005, 99.887))
       ).toBeFalsy()
+    })
+  })
+})
+
+describe('Canvas', () => {
+  describe('Initialization', () => {
+    test('Should have the passed width', () => {
+      const canvas = new Canvas(10, 20)
+      expect(canvas.width).toBe(10)
+    })
+
+    test('Should have the passed height', () => {
+      const canvas = new Canvas(10, 20)
+      expect(canvas.height).toBe(20)
     })
   })
 })
