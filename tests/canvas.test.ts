@@ -47,11 +47,25 @@ describe('Canvas', () => {
   })
 
   describe('setPixel', () => {
+    const canvas = new Canvas(10, 20)
+    const color = new Color(255, 0, 102)
+
     test('Should set the color of pixels', () => {
-      const canvas = new Canvas(10, 20)
-      const color = new Color(255, 0, 102)
       canvas.setPixel(2, 3, color)
       expect(canvas.getPixel(2, 3)).toEqualColor(color)
+    })
+
+    test('Should clamp pixel coordinates', () => {
+      canvas.setPixel(-1, -1, color)
+      expect(canvas.getPixel(0, 0)).toEqualColor(color)
+
+      canvas.setPixel(15, 25, color)
+      expect(canvas.getPixel(10, 20)).toEqualColor(color)
+    })
+
+    test('Should round pixel coordinates', () => {
+      canvas.setPixel(1.34, 7.6, color)
+      expect(canvas.getPixel(1, 8)).toEqualColor(color)
     })
   })
 })

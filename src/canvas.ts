@@ -1,4 +1,4 @@
-import { almostEquals } from '~utils'
+import { almostEquals, clampNumber } from '~utils'
 
 export class Color {
   r: number
@@ -36,6 +36,8 @@ export class Canvas {
   }
 
   private getPixelIndex(x: number, y: number): number {
+    x = Math.round(clampNumber(x, 0, this.width))
+    y = Math.round(clampNumber(y, 0, this.height))
     return y * this.width + x
   }
 
