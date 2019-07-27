@@ -1,10 +1,12 @@
 import { Vector, Point } from '~geometry/geometry'
+import { Color } from '~canvas'
 
 declare global {
   namespace jest {
     interface Matchers<R> {
       toEqualPoint(point: Point): R
       toEqualVector(vector: Vector): R
+      toEqualColor(color: Color): R
     }
   }
 }
@@ -40,6 +42,23 @@ expect.extend({
         `expected ${received.toText()} to${
           pass ? ' not ' : ' '
         }equal ${vector.toText()}`,
+      pass
+    }
+  },
+
+  toEqualColor(received, color) {
+    if (!(received instanceof Color))
+      return {
+        message: () => `expected ${received} to be a color`,
+        pass: false
+      }
+
+    const pass = received.equals(color)
+    return {
+      message: () =>
+        `expected ${received.toText()} to${
+          pass ? ' not ' : ' '
+        }equal ${color.toText()}`,
       pass
     }
   }
