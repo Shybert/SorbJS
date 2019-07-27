@@ -22,11 +22,24 @@ export class Color {
     )
   }
 }
+
 export class Canvas {
+  private imageData: Color[]
   readonly width: number
   readonly height: number
   constructor(width: number, height: number) {
     this.width = width
     this.height = height
+    this.imageData = new Array(this.width * this.height).fill(
+      new Color(0, 0, 0)
+    )
+  }
+
+  private getPixelIndex(x: number, y: number): number {
+    return y * this.width + x
+  }
+
+  public getPixel(x: number, y: number): Color {
+    return this.imageData[this.getPixelIndex(x, y)]
   }
 }
