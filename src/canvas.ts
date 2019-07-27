@@ -42,4 +42,7 @@ export class Canvas {
   public getPixel(x: number, y: number): Color {
     return this.imageData[this.getPixelIndex(x, y)]
   }
+  public setPixel(x: number, y: number, color: Color) {
+    this.imageData[this.getPixelIndex(x, y)] = color
+  }
 }

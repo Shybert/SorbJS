@@ -47,13 +47,12 @@ describe('Canvas', () => {
     })
   })
 
-  describe('getPixel', () => {
-    test('Should return the color of the pixel', () => {
-      // TODO
-    })
-
-    test('Should clamp passed x & y values', () => {
-      // TODO
+  describe('setPixel', () => {
+    test('Should set the color of pixels', () => {
+      const canvas = new Canvas(10, 20)
+      const color = new Color(255, 0, 102)
+      canvas.setPixel(2, 3, color)
+      expect(canvas.getPixel(2, 3)).toEqualColor(color)
     })
   })
 })
