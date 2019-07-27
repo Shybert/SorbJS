@@ -26,18 +26,17 @@ describe('Color', () => {
 
 describe('Canvas', () => {
   describe('Initialization', () => {
+    const canvas = new Canvas(10, 20)
+
     test('Should have the passed width', () => {
-      const canvas = new Canvas(10, 20)
       expect(canvas.width).toBe(10)
     })
 
     test('Should have the passed height', () => {
-      const canvas = new Canvas(10, 20)
       expect(canvas.height).toBe(20)
     })
 
     test('Should initialize all pixels as black', () => {
-      const canvas = new Canvas(10, 20)
       const black = new Color(0, 0, 0)
       for (let i = 0; i < 10; i += 1) {
         for (let j = 0; j < 20; j += 1) {
