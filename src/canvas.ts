@@ -48,3 +48,23 @@ export class Canvas {
     this.imageData[this.getPixelIndex(x, y)] = color
   }
 }
+
+export function renderCanvas(canvas: Canvas, element: HTMLCanvasElement) {
+  const ctx = element.getContext('2d') as CanvasRenderingContext2D
+  element.width = canvas.width
+  element.height = canvas.height
+  const imageData = ctx.createImageData(canvas.width, canvas.height)
+
+  for (let x = 0; x < canvas.width; x += 1) {
+    for (let y = 0; y < canvas.height; y += 1) {
+      const color = canvas.getPixel(x, y)
+      const index = (x + y * canvas.width) * 4
+      imageData.data[index] = color.r
+      imageData.data[index + 1] = color.g
+      imageData.data[index + 2] = color.b
+      imageData.data[index + 3] = 255
+    }
+  }
+
+  ctx.putImageData(imageData, 0, 0)
+}
