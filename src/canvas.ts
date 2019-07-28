@@ -1,4 +1,4 @@
-import { almostEquals, clampNumber } from '~utils'
+import { almostEquals, clampNumber } from '~src/utils'
 
 export class Color {
   r: number

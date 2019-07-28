@@ -1,4 +1,4 @@
-import { almostEquals } from '~utils'
+import { almostEquals } from '~src/utils'
 
 export class Point {
   x: number

@@ -1,4 +1,4 @@
-import { Color, Canvas } from '~canvas'
+import { Color, Canvas } from '~src/canvas'
 
 describe('Color', () => {
   test('toText', () => {

@@ -1,4 +1,4 @@
-import { almostEquals, clampNumber } from '~utils'
+import { almostEquals, clampNumber } from '~src/utils'
 
 describe('almostEquals', () => {
   test('Should return true for equal numbers', () => {

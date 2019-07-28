@@ -1,5 +1,5 @@
-import { Vector, Point } from '~geometry/geometry'
-import { Color } from '~canvas'
+import { Vector, Point } from '~src/geometry/geometry'
+import { Color } from '~src/canvas'
 
 declare global {
   namespace jest {

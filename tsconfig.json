@@ -11,9 +11,9 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "~*": ["./*"]
+      "~*": ["*"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },

@@ -1,4 +1,4 @@
-import { Point, Vector } from '~geometry/geometry'
+import { Point, Vector } from '~src/geometry/geometry'
 
 describe('Point', () => {
   test('toText', () => {

@@ -1,5 +1,5 @@
-import { vectorBetween, dot, cross } from '~geometry/math'
-import { Point, Vector } from '~geometry/geometry'
+import { vectorBetween, dot, cross } from '~src/geometry/math'
+import { Point, Vector } from '~src/geometry/geometry'
 
 describe('vectorBetween', () => {
   test('Should give you the vector between two points', () => {
