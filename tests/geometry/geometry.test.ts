@@ -1,4 +1,4 @@
-import { Point, Vector } from '~src/geometry/geometry'
+import { Point, Vector, Matrix } from '~src/geometry/geometry'
 
 describe('Point', () => {
   test('toText', () => {
@@ -112,5 +112,62 @@ describe('Vector', () => {
       new Vector(1 / Math.sqrt(14), 2 / Math.sqrt(14), 3 / Math.sqrt(14))
     )
     expect(vector2.length()).toBeCloseTo(1)
+  })
+})
+
+describe('Matrix', () => {
+  test('Should be the identity matrix by default', () => {
+    const identityMatrix = new Matrix([
+      [1, 0, 0, 0],
+      [0, 1, 0, 0],
+      [0, 0, 1, 0],
+      [0, 0, 0, 1]
+    ])
+    expect(new Matrix()).toEqualMatrix(identityMatrix)
+  })
+
+  test('toText', () => {
+    expect(new Matrix().toText()).toEqual(
+      '[1, 0, 0, 0\n' + '0, 1, 0, 0\n' + '0, 0, 1, 0\n' + '0, 0, 0, 1]'
+    )
+  })
+
+  describe('equals', () => {
+    test('Should return true for equal matrices', () => {
+      expect(
+        new Matrix([
+          [1, 2, 3, 4],
+          [5, 6, 7, 8],
+          [8, 7, 6, 5],
+          [4, 3, 2, 1]
+        ]).equals(
+          new Matrix([[1, 2, 3, 4], [5, 6, 7, 8], [8, 7, 6, 5], [4, 3, 2, 1]])
+        )
+      ).toBeTruthy()
+    })
+
+    test('Should return false for unequal matrices', () => {
+      expect(
+        new Matrix([
+          [1, 2, 3, 4],
+          [5, 6, 7, 8],
+          [8, 7, 6, 5],
+          [4, 3, 2, 1]
+        ]).equals(
+          new Matrix([[2, 3, 4, 5], [6, 7, 8, 9], [9, 8, 7, 6], [5, 4, 3, 2]])
+        )
+      ).toBeFalsy()
+    })
+
+    test('Should handle floating point errors', () => {
+      expect(
+        new Matrix([
+          [1.0000001, 0, 0, 0],
+          [0, 1, 0, 0],
+          [0, 0, 1, 0],
+          [0, 0, 0, 1]
+        ]).equals(new Matrix())
+      ).toBeTruthy()
+    })
   })
 })

@@ -90,3 +90,33 @@ export class Vector {
     this.divide(this.length())
   }
 }
+
+export class Matrix {
+  matrix: number[][] = [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+
+  // matrix parameter must be a 4x4 array
+  constructor(matrix?: number[][]) {
+    if (matrix) this.matrix = matrix
+  }
+
+  toText() {
+    let test: string = '['
+    for (let i = 0; i < 4; i += 1) {
+      for (let j = 0; j < 4; j += 1) {
+        test += this.matrix[i][j]
+        if (j != 3) test += ', '
+      }
+      if (i != 3) test += '\n'
+    }
+    return (test += ']')
+  }
+
+  equals(matrix: Matrix) {
+    for (let i = 0; i < 4; i += 1) {
+      for (let j = 0; j < 4; j += 1) {
+        if (!almostEquals(this.matrix[i][j], matrix.matrix[i][j])) return false
+      }
+    }
+    return true
+  }
+}

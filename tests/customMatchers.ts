@@ -1,4 +1,4 @@
-import { Vector, Point } from '~src/geometry/geometry'
+import { Vector, Point, Matrix } from '~src/geometry/geometry'
 import { Color } from '~src/canvas'
 
 declare global {
@@ -6,6 +6,7 @@ declare global {
     interface Matchers<R> {
       toEqualPoint(point: Point): R
       toEqualVector(vector: Vector): R
+      toEqualMatrix(matrix: Matrix): R
       toEqualColor(color: Color): R
     }
   }
@@ -42,6 +43,23 @@ expect.extend({
         `expected ${received.toText()} to${
           pass ? ' not ' : ' '
         }equal ${vector.toText()}`,
+      pass
+    }
+  },
+
+  toEqualMatrix(received, matrix) {
+    if (!(received instanceof Matrix))
+      return {
+        message: () => `expected ${received} to be a matrix`,
+        pass: false
+      }
+
+    const pass = received.equals(matrix)
+    return {
+      message: () =>
+        `expected\n${received.toText()}\nto${
+          pass ? ' not ' : ' '
+        }equal\n${matrix.toText()}`,
       pass
     }
   },
