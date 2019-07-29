@@ -1,4 +1,4 @@
-import { Point, Vector } from '~src/geometry/geometry'
+import { Point, Vector, Matrix } from '~src/geometry/geometry'
 
 export function vectorBetween(point1: Point, point2: Point): Vector {
   return new Vector(
@@ -18,4 +18,18 @@ export function cross(vector1: Vector, vector2: Vector): Vector {
     vector1.z * vector2.x - vector1.x * vector2.z,
     vector1.x * vector2.y - vector1.y * vector2.x
   )
+}
+
+export function matrixMultiplication(a: Matrix, b: Matrix): Matrix {
+  const matrix = new Matrix()
+  for (let i = 0; i < 4; i += 1) {
+    for (let j = 0; j < 4; j += 1) {
+      matrix.matrix[i][j] =
+        b.matrix[0][j] * a.matrix[i][0] +
+        b.matrix[1][j] * a.matrix[i][1] +
+        b.matrix[2][j] * a.matrix[i][2] +
+        b.matrix[3][j] * a.matrix[i][3]
+    }
+  }
+  return matrix
 }
