@@ -1,4 +1,4 @@
-import { almostEquals } from '~src/utils'
+import { almostEquals, swapArrayElements } from '~src/utils'
 
 export class Point {
   x: number
@@ -147,5 +147,50 @@ export class Matrix {
         this.matrix[3][3]
       ]
     ])
+  }
+
+  inverse(): Matrix {
+    const matrixCopy = new Matrix(this.matrix.map(arr => arr.slice()))
+    const identityMatrix = new Matrix()
+
+    for (let i = 0; i < 4; i += 1) {
+      let pivot = matrixCopy.matrix[i][i]
+
+      // If the pivot is 0, swap with a lower row
+      if (pivot === 0) {
+        for (let j = i + 1; j < 4; j += 1) {
+          if (matrixCopy.matrix[j][i] !== 0) {
+            swapArrayElements(matrixCopy.matrix, i, j)
+            swapArrayElements(identityMatrix.matrix, i, j)
+            break
+          }
+        }
+
+        pivot = matrixCopy.matrix[i][i]
+        if (pivot === 0)
+          throw new Error('Matrix is singular and not invertable.')
+      }
+
+      // If the pivot doesn't equal 1, divide the row by the pivot
+      if (pivot !== 1) {
+        for (let j = 0; j < 4; j += 1) {
+          matrixCopy.matrix[i][j] /= pivot
+          identityMatrix.matrix[i][j] /= pivot
+        }
+      }
+
+      // Make all elements in the column, except for the pivot, 0
+      for (let j = 0; j < 4; j += 1) {
+        if (j !== i && matrixCopy.matrix[j][i] !== 0) {
+          const scalar = matrixCopy.matrix[j][i]
+          for (let k = 0; k < 4; k += 1) {
+            matrixCopy.matrix[j][k] -= scalar * matrixCopy.matrix[i][k]
+            identityMatrix.matrix[j][k] -= scalar * identityMatrix.matrix[i][k]
+          }
+        }
+      }
+    }
+
+    return identityMatrix
   }
 }
