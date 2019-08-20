@@ -21,15 +21,15 @@ export function cross(vector1: Vector, vector2: Vector): Vector {
 }
 
 export function matrixMultiplication(a: Matrix, b: Matrix): Matrix {
-  const matrix = new Matrix()
+  const newMatrix = new Matrix()
   for (let i = 0; i < 4; i += 1) {
     for (let j = 0; j < 4; j += 1) {
-      matrix.matrix[i][j] =
+      newMatrix.matrix[i][j] =
         b.matrix[0][j] * a.matrix[i][0] +
         b.matrix[1][j] * a.matrix[i][1] +
         b.matrix[2][j] * a.matrix[i][2] +
         b.matrix[3][j] * a.matrix[i][3]
     }
   }
-  return matrix
+  return newMatrix
 }
