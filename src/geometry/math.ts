@@ -53,3 +53,30 @@ export function matrixVectorMultiplication(
     vector.z * matrix.matrix[2][2]
   return newVector
 }
+
+export function matrixPointMultiplication(matrix: Matrix, point: Point): Point {
+  const newPoint = new Point(0, 0, 0)
+  newPoint.x =
+    point.x * matrix.matrix[0][0] +
+    point.y * matrix.matrix[0][1] +
+    point.z * matrix.matrix[0][2] +
+    matrix.matrix[0][3]
+  newPoint.y =
+    point.x * matrix.matrix[1][0] +
+    point.y * matrix.matrix[1][1] +
+    point.z * matrix.matrix[1][2] +
+    matrix.matrix[1][3]
+  newPoint.z =
+    point.x * matrix.matrix[2][0] +
+    point.y * matrix.matrix[2][1] +
+    point.z * matrix.matrix[2][2] +
+    matrix.matrix[2][3]
+  const w =
+    point.x * matrix.matrix[3][0] +
+    point.y * matrix.matrix[3][1] +
+    point.z * matrix.matrix[3][2] +
+    matrix.matrix[3][3]
+
+  newPoint.divide(w)
+  return newPoint
+}

@@ -3,7 +3,8 @@ import {
   dot,
   cross,
   matrixMultiplication,
-  matrixVectorMultiplication
+  matrixVectorMultiplication,
+  matrixPointMultiplication
 } from '~src/geometry/math'
 import { Point, Vector, Matrix } from '~src/geometry/geometry'
 
@@ -67,6 +68,47 @@ describe('matrixVectorMultiplication', () => {
     const vector = new Vector(1, 2, 3)
     expect(matrixVectorMultiplication(matrix, vector)).toEqualVector(
       new Vector(14, 22, 32)
+    )
+  })
+})
+
+describe('matrixPointMultiplication', () => {
+  test('Should let you multiply a point by a matrix', () => {
+    const matrix = new Matrix([
+      [1, 2, 3, 0],
+      [2, 4, 4, 0],
+      [8, 6, 4, 0],
+      [0, 0, 0, 1]
+    ])
+    const point = new Point(1, 2, 3)
+    expect(matrixPointMultiplication(matrix, point)).toEqualPoint(
+      new Point(14, 22, 32)
+    )
+  })
+
+  test('Should divide the point by the homogeneous weight', () => {
+    const matrix = new Matrix([
+      [1, 2, 3, 0],
+      [2, 4, 4, 0],
+      [8, 6, 4, 0],
+      [0, 0, 0, 2]
+    ])
+    const point = new Point(1, 2, 3)
+    expect(matrixPointMultiplication(matrix, point)).toEqualPoint(
+      new Point(7, 11, 16)
+    )
+  })
+
+  test("Should take the matrix's 4th basis vector into account", () => {
+    const matrix = new Matrix([
+      [1, 2, 3, 4],
+      [2, 4, 4, 2],
+      [8, 6, 4, 2],
+      [0, 0, 0, 1]
+    ])
+    const point = new Point(1, 2, 3)
+    expect(matrixPointMultiplication(matrix, point)).toEqualPoint(
+      new Point(18, 24, 34)
     )
   })
 })
