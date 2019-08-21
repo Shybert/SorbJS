@@ -2,7 +2,8 @@ import {
   vectorBetween,
   dot,
   cross,
-  matrixMultiplication
+  matrixMultiplication,
+  matrixVectorMultiplication
 } from '~src/geometry/math'
 import { Point, Vector, Matrix } from '~src/geometry/geometry'
 
@@ -41,4 +42,31 @@ test('matrixMultiplication', () => {
       [16, 26, 46, 42]
     ])
   )
+})
+
+describe('matrixVectorMultiplication', () => {
+  test('Should let you multiply a vector by a matrix', () => {
+    const matrix = new Matrix([
+      [1, 2, 3, 4],
+      [2, 4, 4, 2],
+      [8, 6, 4, 1],
+      [0, 0, 0, 1]
+    ])
+    const vector = new Vector(1, 2, 3)
+    expect(matrixVectorMultiplication(matrix, vector)).toEqualVector(
+      new Vector(14, 22, 32)
+    )
+  })
+  test("Should ignore the matrix's 4th basis vector", () => {
+    const matrix = new Matrix([
+      [1, 2, 3, 369],
+      [2, 4, 4, 42],
+      [8, 6, 4, 0.5678],
+      [0, 0, 0, -42]
+    ])
+    const vector = new Vector(1, 2, 3)
+    expect(matrixVectorMultiplication(matrix, vector)).toEqualVector(
+      new Vector(14, 22, 32)
+    )
+  })
 })

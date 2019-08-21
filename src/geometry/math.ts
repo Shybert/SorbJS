@@ -33,3 +33,23 @@ export function matrixMultiplication(a: Matrix, b: Matrix): Matrix {
   }
   return newMatrix
 }
+
+export function matrixVectorMultiplication(
+  matrix: Matrix,
+  vector: Vector
+): Vector {
+  const newVector = new Vector(0, 0, 0)
+  newVector.x =
+    vector.x * matrix.matrix[0][0] +
+    vector.y * matrix.matrix[0][1] +
+    vector.z * matrix.matrix[0][2]
+  newVector.y =
+    vector.x * matrix.matrix[1][0] +
+    vector.y * matrix.matrix[1][1] +
+    vector.z * matrix.matrix[1][2]
+  newVector.z =
+    vector.x * matrix.matrix[2][0] +
+    vector.y * matrix.matrix[2][1] +
+    vector.z * matrix.matrix[2][2]
+  return newVector
+}
