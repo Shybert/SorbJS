@@ -1,4 +1,5 @@
 import { Vector, Point, Matrix } from '~src/geometry/geometry'
+import { Transform } from '~src/geometry/transform'
 import { Color } from '~src/canvas'
 
 declare global {
@@ -7,6 +8,7 @@ declare global {
       toEqualPoint(point: Point): R
       toEqualVector(vector: Vector): R
       toEqualMatrix(matrix: Matrix): R
+      toEqualTransform(transform: Transform): R
       toEqualColor(color: Color): R
     }
   }
@@ -60,6 +62,23 @@ expect.extend({
         `expected\n${received.toText()}\nto${
           pass ? ' not ' : ' '
         }equal\n${matrix.toText()}`,
+      pass
+    }
+  },
+
+  toEqualTransform(received, transform) {
+    if (!(received instanceof Transform))
+      return {
+        message: () => `expected ${received} to be a transform`,
+        pass: false
+      }
+
+    const pass = received.equals(transform)
+    return {
+      message: () =>
+        `expected\n${received.toText()}\nto${
+          pass ? ' not ' : ' '
+        }equal\n${transform.toText()}`,
       pass
     }
   },
