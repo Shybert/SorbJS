@@ -188,7 +188,7 @@ describe('Matrix', () => {
   })
 
   describe('transpose', () => {
-    test('Should work', () => {
+    test('Should return the transposed matrix', () => {
       const matrix = new Matrix([
         [0, 9, 3, 0],
         [9, 8, 0, 8],
