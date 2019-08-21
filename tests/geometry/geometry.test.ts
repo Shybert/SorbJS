@@ -35,6 +35,21 @@ describe('Point', () => {
     point.subtract(new Vector(-0.75, -44, 2))
     expect(point).toEqualPoint(new Point(0.5, 77, 38))
   })
+
+  test('multiply', () => {
+    const point = new Point(1, -2, 3)
+    point.multiply(3.5)
+    expect(point).toEqualPoint(new Point(3.5, -7, 10.5))
+
+    point.multiply(0.5)
+    expect(point).toEqualPoint(new Point(1.75, -3.5, 5.25))
+  })
+
+  test('divide', () => {
+    const point = new Point(1, -2, 3)
+    point.divide(2)
+    expect(point).toEqualPoint(new Point(0.5, -1, 1.5))
+  })
 })
 
 describe('Vector', () => {

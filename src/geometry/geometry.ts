@@ -32,6 +32,16 @@ export class Point {
     this.y -= vector.y
     this.z -= vector.z
   }
+  multiply(scalar: number) {
+    this.x *= scalar
+    this.y *= scalar
+    this.z *= scalar
+  }
+  divide(scalar: number) {
+    this.x /= scalar
+    this.y /= scalar
+    this.z /= scalar
+  }
 }
 
 export class Vector {
