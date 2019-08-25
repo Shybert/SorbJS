@@ -74,4 +74,27 @@ describe('Transform', () => {
       expect(transform.rotateX(Math.PI)).toBe(transform)
     })
   })
+
+  describe('rotateY', () => {
+    test('Should transform the transformation to a rotation transformation around the y-axis', () => {
+      const transform = new Transform()
+      const angle = Math.PI / 6
+      const sinAngle = Math.sin(angle)
+      const cosAngle = Math.cos(angle)
+      const rotationTransform = new Transform([
+        [cosAngle, 0, sinAngle, 0],
+        [0, 1, 0, 0],
+        [-sinAngle, 0, cosAngle, 0],
+        [0, 0, 0, 1]
+      ])
+
+      transform.rotateY(angle)
+      expect(transform).toEqualTransform(rotationTransform)
+    })
+
+    test('Should return the transformation', () => {
+      const transform = new Transform()
+      expect(transform.rotateY(Math.PI)).toBe(transform)
+    })
+  })
 })
