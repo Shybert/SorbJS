@@ -19,4 +19,18 @@ export class Transform extends Matrix {
     )
     return this
   }
+
+  public rotateX(angle: number): this {
+    const sinAngle = Math.sin(angle)
+    const cosAngle = Math.cos(angle)
+    this.multiplyAssign(
+      new Matrix([
+        [1, 0, 0, 0],
+        [0, cosAngle, -sinAngle, 0],
+        [0, sinAngle, cosAngle, 0],
+        [0, 0, 0, 1]
+      ])
+    )
+    return this
+  }
 }
