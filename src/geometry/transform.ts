@@ -12,4 +12,11 @@ export class Transform extends Matrix {
     )
     return this
   }
+
+  public scale(x: number, y: number, z: number): this {
+    this.multiplyAssign(
+      new Matrix([[x, 0, 0, 0], [0, y, 0, 0], [0, 0, z, 0], [0, 0, 0, 1]])
+    )
+    return this
+  }
 }

@@ -30,4 +30,23 @@ describe('Transform', () => {
       expect(transform.translate(1, 2, 3)).toBe(transform)
     })
   })
+
+  describe('scale', () => {
+    test('Should transform the transformation to a scale transformation', () => {
+      const transform = new Transform()
+      transform.scale(1, 2, 3)
+      const scaleTransform = new Transform([
+        [1, 0, 0, 0],
+        [0, 2, 0, 0],
+        [0, 0, 3, 0],
+        [0, 0, 0, 1]
+      ])
+      expect(transform).toEqualTransform(scaleTransform)
+    })
+
+    test('Should return the transformation', () => {
+      const transform = new Transform()
+      expect(transform.scale(1, 2, 3)).toBe(transform)
+    })
+  })
 })
