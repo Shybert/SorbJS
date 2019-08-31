@@ -14,7 +14,7 @@ export class Color {
     return `(${this.r}, ${this.g}, ${this.b})`
   }
 
-  equals(color: Color) {
+  equals(color: Color): boolean {
     return (
       almostEquals(this.r, color.r) &&
       almostEquals(this.g, color.g) &&
@@ -41,15 +41,15 @@ export class Canvas {
     return y * this.width + x
   }
 
-  public getPixel(x: number, y: number): Color {
+  getPixel(x: number, y: number): Color {
     return this.imageData[this.getPixelIndex(x, y)]
   }
-  public setPixel(x: number, y: number, color: Color) {
+  setPixel(x: number, y: number, color: Color): void {
     this.imageData[this.getPixelIndex(x, y)] = color
   }
 }
 
-export function renderCanvas(canvas: Canvas, element: HTMLCanvasElement) {
+export function renderCanvas(canvas: Canvas, element: HTMLCanvasElement): void {
   const ctx = element.getContext('2d') as CanvasRenderingContext2D
   element.width = canvas.width
   element.height = canvas.height

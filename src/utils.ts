@@ -1,4 +1,4 @@
-export function almostEquals(a: number, b: number) {
+export function almostEquals(a: number, b: number): boolean {
   return Math.abs(a - b) < 0.00001
 }
 

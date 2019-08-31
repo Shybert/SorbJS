@@ -14,7 +14,7 @@ export class Point {
     return `(${this.x}, ${this.y}, ${this.z})`
   }
 
-  equals(point: Point) {
+  equals(point: Point): boolean {
     return (
       almostEquals(this.x, point.x) &&
       almostEquals(this.y, point.y) &&
@@ -22,22 +22,22 @@ export class Point {
     )
   }
 
-  add(vector: Vector) {
+  add(vector: Vector): void {
     this.x += vector.x
     this.y += vector.y
     this.z += vector.z
   }
-  subtract(vector: Vector) {
+  subtract(vector: Vector): void {
     this.x -= vector.x
     this.y -= vector.y
     this.z -= vector.z
   }
-  multiply(scalar: number) {
+  multiply(scalar: number): void {
     this.x *= scalar
     this.y *= scalar
     this.z *= scalar
   }
-  divide(scalar: number) {
+  divide(scalar: number): void {
     this.x /= scalar
     this.y /= scalar
     this.z /= scalar
@@ -62,41 +62,41 @@ export class Vector {
     return Math.sqrt(this.x ** 2 + this.y ** 2 + this.z ** 2)
   }
 
-  equals(vector: Vector) {
+  equals(vector: Vector): boolean {
     return (
       almostEquals(this.x, vector.x) &&
       almostEquals(this.y, vector.y) &&
       almostEquals(this.z, vector.z)
     )
   }
-  add(vector: Vector) {
+  add(vector: Vector): void {
     this.x += vector.x
     this.y += vector.y
     this.z += vector.z
   }
-  subtract(vector: Vector) {
+  subtract(vector: Vector): void {
     this.x -= vector.x
     this.y -= vector.y
     this.z -= vector.z
   }
-  multiply(scalar: number) {
+  multiply(scalar: number): void {
     this.x *= scalar
     this.y *= scalar
     this.z *= scalar
   }
-  divide(scalar: number) {
+  divide(scalar: number): void {
     this.x /= scalar
     this.y /= scalar
     this.z /= scalar
   }
 
-  negate() {
+  negate(): void {
     this.x = -this.x
     this.y = -this.y
     this.z = -this.z
   }
 
-  normalize() {
+  normalize(): void {
     this.divide(this.length())
   }
 }
@@ -109,7 +109,7 @@ export class Matrix {
     if (matrix) this.matrix = matrix
   }
 
-  toText() {
+  toText(): string {
     let test: string = '['
     for (let i = 0; i < 4; i += 1) {
       for (let j = 0; j < 4; j += 1) {
@@ -121,7 +121,7 @@ export class Matrix {
     return (test += ']')
   }
 
-  equals(matrix: Matrix) {
+  equals(matrix: Matrix): boolean {
     for (let i = 0; i < 4; i += 1) {
       for (let j = 0; j < 4; j += 1) {
         if (!almostEquals(this.matrix[i][j], matrix.matrix[i][j])) return false
