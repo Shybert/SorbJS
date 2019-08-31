@@ -18,7 +18,7 @@ expect.extend({
   toEqualPoint(received, point) {
     if (!(received instanceof Point))
       return {
-        message: () => `expected ${received} to be a vector`,
+        message: () => `expected ${received} to be a point`,
         pass: false
       }
 
