@@ -102,7 +102,12 @@ export class Vector {
 }
 
 export class Matrix {
-  matrix: number[][] = [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+  private matrix: number[][] = [
+    [1, 0, 0, 0],
+    [0, 1, 0, 0],
+    [0, 0, 1, 0],
+    [0, 0, 0, 1]
+  ]
 
   // matrix parameter must be a 4x4 array
   constructor(matrix?: number[][]) {
