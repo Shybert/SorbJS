@@ -15,7 +15,7 @@ declare global {
 }
 
 expect.extend({
-  toEqualPoint(received, point) {
+  toEqualPoint(received, point: Point) {
     if (!(received instanceof Point))
       return {
         message: () => `expected ${received} to be a point`,
@@ -32,7 +32,7 @@ expect.extend({
     }
   },
 
-  toEqualVector(received, vector) {
+  toEqualVector(received, vector: Vector) {
     if (!(received instanceof Vector))
       return {
         message: () => `expected ${received} to be a vector`,
@@ -49,7 +49,7 @@ expect.extend({
     }
   },
 
-  toEqualMatrix(received, matrix) {
+  toEqualMatrix(received, matrix: Matrix) {
     if (!(received instanceof Matrix))
       return {
         message: () => `expected ${received} to be a matrix`,
@@ -66,7 +66,7 @@ expect.extend({
     }
   },
 
-  toEqualTransform(received, transform) {
+  toEqualTransform(received, transform: Transform) {
     if (!(received instanceof Transform))
       return {
         message: () => `expected ${received} to be a transform`,
@@ -83,7 +83,7 @@ expect.extend({
     }
   },
 
-  toEqualColor(received, color) {
+  toEqualColor(received, color: Color) {
     if (!(received instanceof Color))
       return {
         message: () => `expected ${received} to be a color`,
