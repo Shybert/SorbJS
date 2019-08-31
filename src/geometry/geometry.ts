@@ -130,6 +130,10 @@ export class Matrix {
     return true
   }
 
+  multiplyAssign(matrix: Matrix): void {
+    this.matrix = matrixMultiplication(this, matrix).matrix
+  }
+
   transpose(): Matrix {
     return new Matrix([
       [
