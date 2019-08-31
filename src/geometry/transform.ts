@@ -29,6 +29,10 @@ export class Transform {
     return new Transform(this.matrix.transpose())
   }
 
+  inverse(): Transform {
+    return new Transform(this.matrix.inverse())
+  }
+
   translate(x: number, y: number, z: number): this {
     this.matrix.multiplyAssign(
       new Matrix([[1, 0, 0, x], [0, 1, 0, y], [0, 0, 1, z], [0, 0, 0, 1]])

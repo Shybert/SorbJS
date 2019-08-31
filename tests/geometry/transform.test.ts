@@ -60,6 +60,23 @@ describe('Transform', () => {
     })
   })
 
+  test('inverse', () => {
+    const translationTransform = new Transform().translate(1, 2, 3)
+    expect(translationTransform.inverse()).toEqualTransform(
+      new Transform().translate(-1, -2, -3)
+    )
+
+    const scaleTransform = new Transform().scale(5, 5, 5)
+    expect(scaleTransform.inverse()).toEqualTransform(
+      new Transform().scale(1 / 5, 1 / 5, 1 / 5)
+    )
+
+    const rotationTransform = new Transform().rotateY(Math.PI)
+    expect(rotationTransform.inverse()).toEqualTransform(
+      rotationTransform.transpose()
+    )
+  })
+
   describe('translate', () => {
     test('Should transform the transformation to a translation transformation', () => {
       const transform = new Transform()
