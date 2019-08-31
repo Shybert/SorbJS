@@ -120,4 +120,102 @@ describe('Transform', () => {
       expect(transform.rotateZ(Math.PI)).toBe(transform)
     })
   })
+
+  describe('shear', () => {
+    test('Should be able to transform the transformation to a shear moving x in proportion to y', () => {
+      const transform = new Transform()
+      const shearTransform = new Transform([
+        [1, 1, 0, 0],
+        [0, 1, 0, 0],
+        [0, 0, 1, 0],
+        [0, 0, 0, 1]
+      ])
+
+      transform.shear({ xy: 1 })
+      expect(transform).toEqualTransform(shearTransform)
+    })
+
+    test('Should be able to transform the transformation to a shear moving x in proportion to z', () => {
+      const transform = new Transform()
+      const shearTransform = new Transform([
+        [1, 0, 1, 0],
+        [0, 1, 0, 0],
+        [0, 0, 1, 0],
+        [0, 0, 0, 1]
+      ])
+
+      transform.shear({ xz: 1 })
+      expect(transform).toEqualTransform(shearTransform)
+    })
+
+    test('Should be able to transform the transformation to a shear moving y in proportion to x', () => {
+      const transform = new Transform()
+      const shearTransform = new Transform([
+        [1, 0, 0, 0],
+        [1, 1, 0, 0],
+        [0, 0, 1, 0],
+        [0, 0, 0, 1]
+      ])
+
+      transform.shear({ yx: 1 })
+      expect(transform).toEqualTransform(shearTransform)
+    })
+
+    test('Should be able to transform the transformation to a shear moving y in proportion to z', () => {
+      const transform = new Transform()
+      const shearTransform = new Transform([
+        [1, 0, 0, 0],
+        [0, 1, 1, 0],
+        [0, 0, 1, 0],
+        [0, 0, 0, 1]
+      ])
+
+      transform.shear({ yz: 1 })
+      expect(transform).toEqualTransform(shearTransform)
+    })
+
+    test('Should be able to transform the transformation to a shear moving z in proportion to x', () => {
+      const transform = new Transform()
+      const shearTransform = new Transform([
+        [1, 0, 0, 0],
+        [0, 1, 0, 0],
+        [1, 0, 1, 0],
+        [0, 0, 0, 1]
+      ])
+
+      transform.shear({ zx: 1 })
+      expect(transform).toEqualTransform(shearTransform)
+    })
+
+    test('Should be able to transform the transformation to a shear moving z in proportion to y', () => {
+      const transform = new Transform()
+      const shearTransform = new Transform([
+        [1, 0, 0, 0],
+        [0, 1, 0, 0],
+        [0, 1, 1, 0],
+        [0, 0, 0, 1]
+      ])
+
+      transform.shear({ zy: 1 })
+      expect(transform).toEqualTransform(shearTransform)
+    })
+
+    test('Should support multiple shears in a single call', () => {
+      const transform = new Transform()
+      const shearTransform = new Transform([
+        [1, 1, 2, 0],
+        [3, 1, 4, 0],
+        [5, 6, 1, 0],
+        [0, 0, 0, 1]
+      ])
+
+      transform.shear({ xy: 1, xz: 2, yx: 3, yz: 4, zx: 5, zy: 6 })
+      expect(transform).toEqualTransform(shearTransform)
+    })
+
+    test('Should return the transformation', () => {
+      const transform = new Transform()
+      expect(transform.shear({ xy: 1, yz: 1, zx: 1 })).toBe(transform)
+    })
+  })
 })

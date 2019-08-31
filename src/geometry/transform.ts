@@ -1,6 +1,15 @@
 import { Matrix } from './geometry'
 import { matrixMultiplication } from './math'
 
+interface IShear {
+  xy?: number
+  xz?: number
+  yx?: number
+  yz?: number
+  zx?: number
+  zy?: number
+}
+
 export class Transform extends Matrix {
   private multiplyAssign(matrix: Matrix): void {
     this.matrix = matrixMultiplication(this, matrix).matrix
@@ -58,6 +67,13 @@ export class Transform extends Matrix {
         [0, 0, 1, 0],
         [0, 0, 0, 1]
       ])
+    )
+    return this
+  }
+
+  public shear({ xy = 0, xz = 0, yx = 0, yz = 0, zx = 0, zy = 0 }: IShear) {
+    this.multiplyAssign(
+      new Matrix([[1, xy, xz, 0], [yx, 1, yz, 0], [zx, zy, 1, 0], [0, 0, 0, 1]])
     )
     return this
   }
