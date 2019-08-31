@@ -218,4 +218,20 @@ describe('Transform', () => {
       expect(transform.shear({ xy: 1, yz: 1, zx: 1 })).toBe(transform)
     })
   })
+
+  test('Should support compositing transformations', () => {
+    const transform = new Transform()
+    const compositedTransform = new Transform([
+      [5, 0, 0, 50],
+      [0, 0, -5, -35],
+      [0, 5, 0, 25],
+      [0, 0, 0, 1]
+    ])
+
+    transform
+      .rotateX(Math.PI / 2)
+      .scale(5, 5, 5)
+      .translate(10, 5, 7)
+    expect(transform).toEqualTransform(compositedTransform)
+  })
 })
