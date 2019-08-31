@@ -43,6 +43,23 @@ describe('Transform', () => {
     })
   })
 
+  describe('transpose', () => {
+    test('Should return the transposed transformation', () => {
+      const transform = new Transform(
+        new Matrix([[0, 9, 3, 0], [9, 8, 0, 8], [1, 8, 5, 3], [0, 0, 5, 8]])
+      )
+      expect(transform.transpose()).toEqualTransform(
+        new Transform(
+          new Matrix([[0, 9, 1, 0], [9, 8, 8, 0], [3, 0, 5, 5], [0, 8, 3, 8]])
+        )
+      )
+    })
+
+    test('Transposing the identity transformation should return the identity transformation', () => {
+      expect(new Matrix().transpose()).toEqualMatrix(new Matrix())
+    })
+  })
+
   describe('translate', () => {
     test('Should transform the transformation to a translation transformation', () => {
       const transform = new Transform()
