@@ -10,16 +10,30 @@ interface IShear {
   zy?: number
 }
 
-export class Transform extends Matrix {
+export class Transform {
+  private matrix: Matrix
+  constructor(matrix?: Matrix) {
+    if (matrix) this.matrix = matrix
+    else this.matrix = new Matrix()
+  }
+
+  toText(): string {
+    return this.matrix.toText()
+  }
+
+  equals(transform: Transform): boolean {
+    return this.matrix.equals(transform.matrix)
+  }
+
   translate(x: number, y: number, z: number): this {
-    this.multiplyAssign(
+    this.matrix.multiplyAssign(
       new Matrix([[1, 0, 0, x], [0, 1, 0, y], [0, 0, 1, z], [0, 0, 0, 1]])
     )
     return this
   }
 
   scale(x: number, y: number, z: number): this {
-    this.multiplyAssign(
+    this.matrix.multiplyAssign(
       new Matrix([[x, 0, 0, 0], [0, y, 0, 0], [0, 0, z, 0], [0, 0, 0, 1]])
     )
     return this
@@ -28,7 +42,7 @@ export class Transform extends Matrix {
   rotateX(angle: number): this {
     const sinAngle = Math.sin(angle)
     const cosAngle = Math.cos(angle)
-    this.multiplyAssign(
+    this.matrix.multiplyAssign(
       new Matrix([
         [1, 0, 0, 0],
         [0, cosAngle, -sinAngle, 0],
@@ -42,7 +56,7 @@ export class Transform extends Matrix {
   rotateY(angle: number): this {
     const sinAngle = Math.sin(angle)
     const cosAngle = Math.cos(angle)
-    this.multiplyAssign(
+    this.matrix.multiplyAssign(
       new Matrix([
         [cosAngle, 0, sinAngle, 0],
         [0, 1, 0, 0],
@@ -56,7 +70,7 @@ export class Transform extends Matrix {
   rotateZ(angle: number): this {
     const sinAngle = Math.sin(angle)
     const cosAngle = Math.cos(angle)
-    this.multiplyAssign(
+    this.matrix.multiplyAssign(
       new Matrix([
         [cosAngle, -sinAngle, 0, 0],
         [sinAngle, cosAngle, 0, 0],
@@ -68,7 +82,7 @@ export class Transform extends Matrix {
   }
 
   shear({ xy = 0, xz = 0, yx = 0, yz = 0, zx = 0, zy = 0 }: IShear): this {
-    this.multiplyAssign(
+    this.matrix.multiplyAssign(
       new Matrix([[1, xy, xz, 0], [yx, 1, yz, 0], [zx, zy, 1, 0], [0, 0, 0, 1]])
     )
     return this
