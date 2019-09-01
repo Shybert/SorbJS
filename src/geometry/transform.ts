@@ -1,5 +1,4 @@
 import { Matrix } from './geometry'
-import { matrixMultiplication } from './math'
 
 interface IShear {
   xy?: number

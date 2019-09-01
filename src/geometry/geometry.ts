@@ -102,12 +102,7 @@ export class Vector {
 }
 
 export class Matrix {
-  private matrix: number[][] = [
-    [1, 0, 0, 0],
-    [0, 1, 0, 0],
-    [0, 0, 1, 0],
-    [0, 0, 0, 1]
-  ]
+  matrix: number[][] = [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
 
   // matrix parameter must be a 4x4 array
   constructor(matrix?: number[][]) {
@@ -135,8 +130,66 @@ export class Matrix {
     return true
   }
 
+  multiplyPoint(point: Point): Point {
+    const newPoint = new Point(0, 0, 0)
+    newPoint.x =
+      point.x * this.matrix[0][0] +
+      point.y * this.matrix[0][1] +
+      point.z * this.matrix[0][2] +
+      this.matrix[0][3]
+    newPoint.y =
+      point.x * this.matrix[1][0] +
+      point.y * this.matrix[1][1] +
+      point.z * this.matrix[1][2] +
+      this.matrix[1][3]
+    newPoint.z =
+      point.x * this.matrix[2][0] +
+      point.y * this.matrix[2][1] +
+      point.z * this.matrix[2][2] +
+      this.matrix[2][3]
+    const w =
+      point.x * this.matrix[3][0] +
+      point.y * this.matrix[3][1] +
+      point.z * this.matrix[3][2] +
+      this.matrix[3][3]
+
+    newPoint.divide(w)
+    return newPoint
+  }
+
+  multiplyVector(vector: Vector): Vector {
+    const newVector = new Vector(0, 0, 0)
+    newVector.x =
+      vector.x * this.matrix[0][0] +
+      vector.y * this.matrix[0][1] +
+      vector.z * this.matrix[0][2]
+    newVector.y =
+      vector.x * this.matrix[1][0] +
+      vector.y * this.matrix[1][1] +
+      vector.z * this.matrix[1][2]
+    newVector.z =
+      vector.x * this.matrix[2][0] +
+      vector.y * this.matrix[2][1] +
+      vector.z * this.matrix[2][2]
+    return newVector
+  }
+
+  multiplyMatrix(matrix: Matrix): Matrix {
+    const newMatrix = new Matrix()
+    for (let i = 0; i < 4; i += 1) {
+      for (let j = 0; j < 4; j += 1) {
+        newMatrix.matrix[i][j] =
+          matrix.matrix[0][j] * this.matrix[i][0] +
+          matrix.matrix[1][j] * this.matrix[i][1] +
+          matrix.matrix[2][j] * this.matrix[i][2] +
+          matrix.matrix[3][j] * this.matrix[i][3]
+      }
+    }
+    return newMatrix
+  }
+
   multiplyAssign(matrix: Matrix): void {
-    this.matrix = matrixMultiplication(this, matrix).matrix
+    this.matrix = this.multiplyMatrix(matrix).matrix
   }
 
   transpose(): Matrix {
