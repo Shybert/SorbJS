@@ -22,6 +22,12 @@ export class Point {
     )
   }
 
+  set(point: Point): void {
+    this.x = point.x
+    this.y = point.y
+    this.z = point.z
+  }
+
   add(vector: Vector): void {
     this.x += vector.x
     this.y += vector.y
@@ -69,6 +75,13 @@ export class Vector {
       almostEquals(this.z, vector.z)
     )
   }
+
+  set(vector: Vector): void {
+    this.x = vector.x
+    this.y = vector.y
+    this.z = vector.z
+  }
+
   add(vector: Vector): void {
     this.x += vector.x
     this.y += vector.y

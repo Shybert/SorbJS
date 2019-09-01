@@ -23,6 +23,12 @@ describe('Point', () => {
     })
   })
 
+  test('set', () => {
+    const point = new Point(1, 2, 3)
+    point.set(new Point(3, 2, 1))
+    expect(point).toEqualPoint(new Point(3, 2, 1))
+  })
+
   test('add', () => {
     const point = new Point(-0.25, 33, 40)
     point.add(new Vector(-0.75, -44, 2))
@@ -80,6 +86,12 @@ describe('Vector', () => {
         new Vector(1, 5.33, -23).equals(new Vector(1e10, 5.00005, 99.887))
       ).toBeFalsy()
     })
+  })
+
+  test('set', () => {
+    const vector = new Vector(1, 2, 3)
+    vector.set(new Vector(3, 2, 1))
+    expect(vector).toEqualVector(new Vector(3, 2, 1))
   })
 
   test('add', () => {
