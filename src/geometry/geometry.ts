@@ -201,10 +201,6 @@ export class Matrix {
     return newMatrix
   }
 
-  multiplyAssign(matrix: Matrix): void {
-    this.matrix = this.multiplyMatrix(matrix).matrix
-  }
-
   transpose(): Matrix {
     return new Matrix([
       [

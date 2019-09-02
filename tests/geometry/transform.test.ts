@@ -266,7 +266,7 @@ describe('Transform', () => {
   test('Should support compositing transformations', () => {
     const transform = new Transform()
     const compositedTransform = new Transform(
-      new Matrix([[5, 0, 0, 50], [0, 0, -5, -35], [0, 5, 0, 25], [0, 0, 0, 1]])
+      new Matrix([[5, 0, 0, 10], [0, 0, -5, 5], [0, 5, 0, 7], [0, 0, 0, 1]])
     )
 
     transform
