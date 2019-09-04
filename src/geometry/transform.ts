@@ -1,4 +1,4 @@
-import { Matrix, Point } from './geometry'
+import { Matrix, Point, Vector } from './geometry'
 
 interface IShear {
   xy?: number
@@ -100,5 +100,9 @@ export class Transform {
 
   transformPoint(point: Point): void {
     point.set(this.matrix.multiplyPoint(point))
+  }
+
+  transformVector(vector: Vector): void {
+    vector.set(this.matrix.multiplyVector(vector))
   }
 }

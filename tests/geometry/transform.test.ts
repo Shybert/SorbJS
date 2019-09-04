@@ -1,5 +1,5 @@
 import { Transform } from '~src/geometry/transform'
-import { Matrix, Point } from '~src/geometry/geometry'
+import { Matrix, Point, Vector } from '~src/geometry/geometry'
 
 describe('Transform', () => {
   test('Should initialize to the identity transformation by default', () => {
@@ -386,6 +386,119 @@ describe('Transform', () => {
 
       compositedTransform.transformPoint(point)
       expect(point).toEqualPoint(new Point(15, 0, 7))
+    })
+  })
+
+  describe('transformVector', () => {
+    test('Translations should not affect vectors', () => {
+      const vector = new Vector(-3, 4, 5)
+      const translation = new Transform().translate(5, -3, 2)
+
+      translation.transformVector(vector)
+      expect(vector).toEqualVector(new Vector(-3, 4, 5))
+    })
+
+    describe('scale', () => {
+      test('Should let you scale a vector', () => {
+        const vector = new Vector(-3, 4, 5)
+        const scale = new Transform().scale(1, 2, 3)
+
+        scale.transformVector(vector)
+        expect(vector).toEqualVector(new Vector(-3, 8, 15))
+      })
+
+      test('Should let you reflect a vector by scaling by negative values', () => {
+        const vector = new Vector(-3, 4, 5)
+        const scale = new Transform().scale(-1, -1, -1)
+
+        scale.transformVector(vector)
+        expect(vector).toEqualVector(new Vector(3, -4, -5))
+      })
+    })
+
+    test('Should let you rotate a vector around the x-axis', () => {
+      const vector = new Vector(0, 1, 0)
+      const rotation = new Transform().rotateX(Math.PI / 2)
+
+      rotation.transformVector(vector)
+      expect(vector).toEqualVector(new Vector(0, 0, 1))
+    })
+
+    test('Should let you rotate a vector around the y-axis', () => {
+      const vector = new Vector(1, 0, 0)
+      const rotation = new Transform().rotateY(Math.PI / 2)
+
+      rotation.transformVector(vector)
+      expect(vector).toEqualVector(new Vector(0, 0, -1))
+    })
+
+    test('Should let you rotate a vector around the z-axis', () => {
+      const vector = new Vector(0, 1, 0)
+      const rotation = new Transform().rotateZ(Math.PI / 2)
+
+      rotation.transformVector(vector)
+      expect(vector).toEqualVector(new Vector(-1, 0, 0))
+    })
+
+    describe('shear', () => {
+      test('Should let you move x in proportion to y', () => {
+        const vector = new Vector(2, 3, 4)
+        const shear = new Transform().shear({ xy: 1 })
+
+        shear.transformVector(vector)
+        expect(vector).toEqualVector(new Vector(5, 3, 4))
+      })
+
+      test('Should let you move x in proportion to z', () => {
+        const vector = new Vector(2, 3, 4)
+        const shear = new Transform().shear({ xz: 1 })
+
+        shear.transformVector(vector)
+        expect(vector).toEqualVector(new Vector(6, 3, 4))
+      })
+
+      test('Should let you move y in proportion to x', () => {
+        const vector = new Vector(2, 3, 4)
+        const shear = new Transform().shear({ yx: 1 })
+
+        shear.transformVector(vector)
+        expect(vector).toEqualVector(new Vector(2, 5, 4))
+      })
+
+      test('Should let you move y in proportion to z', () => {
+        const vector = new Vector(2, 3, 4)
+        const shear = new Transform().shear({ yz: 1 })
+
+        shear.transformVector(vector)
+        expect(vector).toEqualVector(new Vector(2, 7, 4))
+      })
+
+      test('Should let you move z in proportion to x', () => {
+        const vector = new Vector(2, 3, 4)
+        const shear = new Transform().shear({ zx: 1 })
+
+        shear.transformVector(vector)
+        expect(vector).toEqualVector(new Vector(2, 3, 6))
+      })
+
+      test('Should let you move z in proportion to y', () => {
+        const vector = new Vector(2, 3, 4)
+        const shear = new Transform().shear({ zy: 1 })
+
+        shear.transformVector(vector)
+        expect(vector).toEqualVector(new Vector(2, 3, 7))
+      })
+    })
+
+    test('Should work with a composited transformation', () => {
+      const vector = new Vector(1, 0, 1)
+      const compositedTransform = new Transform()
+        .rotateX(Math.PI / 2)
+        .scale(5, 5, 5)
+        .shear({ xy: 2 })
+
+      compositedTransform.transformVector(vector)
+      expect(vector).toEqualVector(new Vector(-5, -5, 0))
     })
   })
 })
