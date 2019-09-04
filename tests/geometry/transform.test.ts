@@ -1,5 +1,5 @@
 import { Transform } from '~src/geometry/transform'
-import { Matrix } from '~src/geometry/geometry'
+import { Matrix, Point } from '~src/geometry/geometry'
 
 describe('Transform', () => {
   test('Should initialize to the identity transformation by default', () => {
@@ -274,5 +274,118 @@ describe('Transform', () => {
       .scale(5, 5, 5)
       .translate(10, 5, 7)
     expect(transform).toEqualTransform(compositedTransform)
+  })
+
+  describe('transformPoint', () => {
+    test('Should let you translate a point', () => {
+      const point = new Point(-3, 4, 5)
+      const translation = new Transform().translate(5, -3, 2)
+
+      translation.transformPoint(point)
+      expect(point).toEqualPoint(new Point(2, 1, 7))
+    })
+
+    describe('scale', () => {
+      test('Should let you scale a point', () => {
+        const point = new Point(-3, 4, 5)
+        const scale = new Transform().scale(1, 2, 3)
+
+        scale.transformPoint(point)
+        expect(point).toEqualPoint(new Point(-3, 8, 15))
+      })
+
+      test('Should let you reflect a point by scaling by negative values', () => {
+        const point = new Point(-3, 4, 5)
+        const scale = new Transform().scale(-1, -1, -1)
+
+        scale.transformPoint(point)
+        expect(point).toEqualPoint(new Point(3, -4, -5))
+      })
+    })
+
+    test('Should let you rotate a point around the x-axis', () => {
+      const point = new Point(0, 1, 0)
+      const rotation = new Transform().rotateX(Math.PI / 2)
+
+      rotation.transformPoint(point)
+      expect(point).toEqualPoint(new Point(0, 0, 1))
+    })
+
+    test('Should let you rotate a point around the y-axis', () => {
+      const point = new Point(1, 0, 0)
+      const rotation = new Transform().rotateY(Math.PI / 2)
+
+      rotation.transformPoint(point)
+      expect(point).toEqualPoint(new Point(0, 0, -1))
+    })
+
+    test('Should let you rotate a point around the z-axis', () => {
+      const point = new Point(0, 1, 0)
+      const rotation = new Transform().rotateZ(Math.PI / 2)
+
+      rotation.transformPoint(point)
+      expect(point).toEqualPoint(new Point(-1, 0, 0))
+    })
+
+    describe('shear', () => {
+      test('Should let you move x in proportion to y', () => {
+        const point = new Point(2, 3, 4)
+        const shear = new Transform().shear({ xy: 1 })
+
+        shear.transformPoint(point)
+        expect(point).toEqualPoint(new Point(5, 3, 4))
+      })
+
+      test('Should let you move x in proportion to z', () => {
+        const point = new Point(2, 3, 4)
+        const shear = new Transform().shear({ xz: 1 })
+
+        shear.transformPoint(point)
+        expect(point).toEqualPoint(new Point(6, 3, 4))
+      })
+
+      test('Should let you move y in proportion to x', () => {
+        const point = new Point(2, 3, 4)
+        const shear = new Transform().shear({ yx: 1 })
+
+        shear.transformPoint(point)
+        expect(point).toEqualPoint(new Point(2, 5, 4))
+      })
+
+      test('Should let you move y in proportion to z', () => {
+        const point = new Point(2, 3, 4)
+        const shear = new Transform().shear({ yz: 1 })
+
+        shear.transformPoint(point)
+        expect(point).toEqualPoint(new Point(2, 7, 4))
+      })
+
+      test('Should let you move z in proportion to x', () => {
+        const point = new Point(2, 3, 4)
+        const shear = new Transform().shear({ zx: 1 })
+
+        shear.transformPoint(point)
+        expect(point).toEqualPoint(new Point(2, 3, 6))
+      })
+
+      test('Should let you move z in proportion to y', () => {
+        const point = new Point(2, 3, 4)
+        const shear = new Transform().shear({ zy: 1 })
+
+        shear.transformPoint(point)
+        expect(point).toEqualPoint(new Point(2, 3, 7))
+      })
+    })
+
+    test('Should work with a composited transformation', () => {
+      const point = new Point(1, 0, 1)
+      const compositedTransform = new Transform()
+        .rotateX(Math.PI / 2)
+        .scale(5, 5, 5)
+        .translate(10, 5, 7)
+
+      compositedTransform.transformPoint(point)
+      expect(point).toEqualPoint(new Point(15, 0, 7))
+    })
   })
 })
