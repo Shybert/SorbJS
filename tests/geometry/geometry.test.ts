@@ -30,29 +30,46 @@ describe('Point', () => {
   })
 
   test('add', () => {
+    const point = new Point(-0.25, 33, 40).add(new Vector(-0.75, -44, 2))
+    expect(point).toEqualPoint(new Point(-1, -11, 42))
+  })
+  test('addAssign', () => {
     const point = new Point(-0.25, 33, 40)
-    point.add(new Vector(-0.75, -44, 2))
+    point.addAssign(new Vector(-0.75, -44, 2))
     expect(point).toEqualPoint(new Point(-1, -11, 42))
   })
 
   test('subtract', () => {
+    const point = new Point(-0.25, 33, 40).subtract(new Vector(-0.75, -44, 2))
+    expect(point).toEqualPoint(new Point(0.5, 77, 38))
+  })
+  test('subtractAssign', () => {
     const point = new Point(-0.25, 33, 40)
-    point.subtract(new Vector(-0.75, -44, 2))
+    point.subtractAssign(new Vector(-0.75, -44, 2))
     expect(point).toEqualPoint(new Point(0.5, 77, 38))
   })
 
   test('multiply', () => {
     const point = new Point(1, -2, 3)
-    point.multiply(3.5)
+    expect(point.multiply(3.5)).toEqualPoint(new Point(3.5, -7, 10.5))
+    expect(point.multiply(0.5)).toEqualPoint(new Point(0.5, -1, 1.5))
+  })
+  test('multiplyAssign', () => {
+    const point = new Point(1, -2, 3)
+    point.multiplyAssign(3.5)
     expect(point).toEqualPoint(new Point(3.5, -7, 10.5))
 
-    point.multiply(0.5)
+    point.multiplyAssign(0.5)
     expect(point).toEqualPoint(new Point(1.75, -3.5, 5.25))
   })
 
   test('divide', () => {
     const point = new Point(1, -2, 3)
-    point.divide(2)
+    expect(point.divide(2)).toEqualPoint(new Point(0.5, -1, 1.5))
+  })
+  test('divideAssign', () => {
+    const point = new Point(1, -2, 3)
+    point.divideAssign(2)
     expect(point).toEqualPoint(new Point(0.5, -1, 1.5))
   })
 })
@@ -95,29 +112,46 @@ describe('Vector', () => {
   })
 
   test('add', () => {
+    const vector = new Vector(-0.25, 33, 40).add(new Vector(-0.75, -44, 2))
+    expect(vector).toEqualVector(new Vector(-1, -11, 42))
+  })
+  test('addAssign', () => {
     const vector = new Vector(-0.25, 33, 40)
-    vector.add(new Vector(-0.75, -44, 2))
+    vector.addAssign(new Vector(-0.75, -44, 2))
     expect(vector).toEqualVector(new Vector(-1, -11, 42))
   })
 
   test('subtract', () => {
+    const vector = new Vector(-0.25, 33, 40).subtract(new Vector(-0.75, -44, 2))
+    expect(vector).toEqualVector(new Vector(0.5, 77, 38))
+  })
+  test('subtractAssign', () => {
     const vector = new Vector(-0.25, 33, 40)
-    vector.subtract(new Vector(-0.75, -44, 2))
+    vector.subtractAssign(new Vector(-0.75, -44, 2))
     expect(vector).toEqualVector(new Vector(0.5, 77, 38))
   })
 
   test('multiply', () => {
     const vector = new Vector(1, -2, 3)
-    vector.multiply(3.5)
+    expect(vector.multiply(3.5)).toEqualVector(new Vector(3.5, -7, 10.5))
+    expect(vector.multiply(0.5)).toEqualVector(new Vector(0.5, -1, 1.5))
+  })
+  test('multiplyAssign', () => {
+    const vector = new Vector(1, -2, 3)
+    vector.multiplyAssign(3.5)
     expect(vector).toEqualVector(new Vector(3.5, -7, 10.5))
 
-    vector.multiply(0.5)
+    vector.multiplyAssign(0.5)
     expect(vector).toEqualVector(new Vector(1.75, -3.5, 5.25))
   })
 
   test('divide', () => {
     const vector = new Vector(1, -2, 3)
-    vector.divide(2)
+    expect(vector.divide(2)).toEqualVector(new Vector(0.5, -1, 1.5))
+  })
+  test('divideAssign', () => {
+    const vector = new Vector(1, -2, 3)
+    vector.divideAssign(2)
     expect(vector).toEqualVector(new Vector(0.5, -1, 1.5))
   })
 

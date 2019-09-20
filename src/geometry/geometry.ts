@@ -28,22 +28,34 @@ export class Point {
     this.z = point.z
   }
 
-  add(vector: Vector): void {
+  add(vector: Vector): Point {
+    return new Point(this.x + vector.x, this.y + vector.y, this.z + vector.z)
+  }
+  addAssign(vector: Vector): void {
     this.x += vector.x
     this.y += vector.y
     this.z += vector.z
   }
-  subtract(vector: Vector): void {
+  subtract(vector: Vector): Point {
+    return new Point(this.x - vector.x, this.y - vector.y, this.z - vector.z)
+  }
+  subtractAssign(vector: Vector): void {
     this.x -= vector.x
     this.y -= vector.y
     this.z -= vector.z
   }
-  multiply(scalar: number): void {
+  multiply(scalar: number): Point {
+    return new Point(this.x * scalar, this.y * scalar, this.z * scalar)
+  }
+  multiplyAssign(scalar: number): void {
     this.x *= scalar
     this.y *= scalar
     this.z *= scalar
   }
-  divide(scalar: number): void {
+  divide(scalar: number): Point {
+    return new Point(this.x / scalar, this.y / scalar, this.z / scalar)
+  }
+  divideAssign(scalar: number): void {
     this.x /= scalar
     this.y /= scalar
     this.z /= scalar
@@ -82,22 +94,34 @@ export class Vector {
     this.z = vector.z
   }
 
-  add(vector: Vector): void {
+  add(vector: Vector): Vector {
+    return new Vector(this.x + vector.x, this.y + vector.y, this.z + vector.z)
+  }
+  addAssign(vector: Vector): void {
     this.x += vector.x
     this.y += vector.y
     this.z += vector.z
   }
-  subtract(vector: Vector): void {
+  subtract(vector: Vector): Vector {
+    return new Vector(this.x - vector.x, this.y - vector.y, this.z - vector.z)
+  }
+  subtractAssign(vector: Vector): void {
     this.x -= vector.x
     this.y -= vector.y
     this.z -= vector.z
   }
-  multiply(scalar: number): void {
+  multiply(scalar: number): Vector {
+    return new Vector(this.x * scalar, this.y * scalar, this.z * scalar)
+  }
+  multiplyAssign(scalar: number): void {
     this.x *= scalar
     this.y *= scalar
     this.z *= scalar
   }
-  divide(scalar: number): void {
+  divide(scalar: number): Vector {
+    return new Vector(this.x / scalar, this.y / scalar, this.z / scalar)
+  }
+  divideAssign(scalar: number): void {
     this.x /= scalar
     this.y /= scalar
     this.z /= scalar
@@ -110,7 +134,7 @@ export class Vector {
   }
 
   normalize(): void {
-    this.divide(this.length())
+    this.divideAssign(this.length())
   }
 }
 
@@ -166,7 +190,7 @@ export class Matrix {
       point.z * this.matrix[3][2] +
       this.matrix[3][3]
 
-    newPoint.divide(w)
+    newPoint.divideAssign(w)
     return newPoint
   }
 
