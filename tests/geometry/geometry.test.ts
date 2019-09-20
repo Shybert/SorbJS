@@ -199,7 +199,7 @@ describe('Matrix', () => {
   })
 
   describe('multiply', () => {
-    describe('matrixPointMultiplication', () => {
+    describe('multiplyPoint', () => {
       test('Should let you multiply a point by the matrix', () => {
         const matrix = new Matrix([
           [1, 2, 3, 0],
