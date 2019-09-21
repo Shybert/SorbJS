@@ -16,3 +16,11 @@ describe('Initialization', () => {
     expect(ray.direction).toEqualVector(direction)
   })
 })
+
+test('position', () => {
+  const ray = new Ray(new Point(2, 3, 4), new Vector(1, 0, 0))
+  expect(ray.position(0)).toEqualPoint(new Point(2, 3, 4))
+  expect(ray.position(1)).toEqualPoint(new Point(3, 3, 4))
+  expect(ray.position(-1)).toEqualPoint(new Point(1, 3, 4))
+  expect(ray.position(2.5)).toEqualPoint(new Point(4.5, 3, 4))
+})

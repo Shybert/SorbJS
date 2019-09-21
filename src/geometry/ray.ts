@@ -9,4 +9,8 @@ export class Ray {
     if (direction) this.direction = direction
     else this.direction = new Vector(0, 0, 0)
   }
+
+  position(t: number): Point {
+    return this.origin.add(this.direction.multiply(t))
+  }
 }
