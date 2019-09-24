@@ -19,3 +19,7 @@ export function cross(vector1: Vector, vector2: Vector): Vector {
     vector1.x * vector2.y - vector1.y * vector2.x
   )
 }
+
+export function discriminant(a: number, b: number, c: number): number {
+  return b ** 2 - 4 * a * c
+}

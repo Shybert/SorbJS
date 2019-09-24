@@ -1,4 +1,4 @@
-import { vectorBetween, dot, cross } from '~src/geometry/math'
+import { vectorBetween, dot, cross, discriminant } from '~src/geometry/math'
 import { Point, Vector } from '~src/geometry/geometry'
 
 describe('vectorBetween', () => {
@@ -17,4 +17,12 @@ test('cross', () => {
   const vector2 = new Vector(2, 3, 4)
   expect(cross(vector1, vector2)).toEqualVector(new Vector(-1, 2, -1))
   expect(cross(vector2, vector1)).toEqualVector(new Vector(1, -2, 1))
+})
+
+test('discriminant', () => {
+  expect(discriminant(2, 4, 9)).toBe(-56)
+  expect(discriminant(2, -5, 0)).toBe(25)
+  expect(discriminant(2, 4, 2)).toBe(0)
+  expect(discriminant(10, 25000, 0.015)).toBeCloseTo(624999999.4)
+  expect(discriminant(0.05, 350.67, -89.2)).toBeCloseTo(122987.289)
 })
