@@ -1,4 +1,4 @@
-import { vectorBetween, dot, cross, discriminant } from '~src/geometry/math'
+import { vectorBetween, dot, cross, quadratic } from '~src/geometry/math'
 import { Point, Vector } from '~src/geometry/geometry'
 
 describe('vectorBetween', () => {
@@ -19,10 +19,30 @@ test('cross', () => {
   expect(cross(vector2, vector1)).toEqualVector(new Vector(1, -2, 1))
 })
 
-test('discriminant', () => {
-  expect(discriminant(2, 4, 9)).toBe(-56)
-  expect(discriminant(2, -5, 0)).toBe(25)
-  expect(discriminant(2, 4, 2)).toBe(0)
-  expect(discriminant(10, 25000, 0.015)).toBeCloseTo(624999999.4)
-  expect(discriminant(0.05, 350.67, -89.2)).toBeCloseTo(122987.289)
+describe('quadratic', () => {
+  test('Two real roots', () => {
+    const roots = quadratic(2, -5, 0)
+    expect(roots.length).toBe(2)
+    expect(roots[0]).toBeCloseTo(0)
+    expect(roots[1]).toBeCloseTo(2.5)
+  })
+
+  test('One real root', () => {
+    const roots = quadratic(2, 4, 2)
+    expect(roots.length).toBe(2)
+    expect(roots[0]).toBeCloseTo(-1)
+    expect(roots[1]).toBeCloseTo(-1)
+  })
+
+  test('Zero real roots', () => {
+    const roots = quadratic(2, 4, 9)
+    expect(roots.length).toBe(0)
+  })
+
+  test('Large floating point numbers', () => {
+    const roots = quadratic(-299.45, 392348.998, 889.000987)
+    expect(roots.length).toBe(2)
+    expect(roots[0]).toBeCloseTo(-0.0023)
+    expect(roots[1]).toBeCloseTo(1310.2344)
+  })
 })

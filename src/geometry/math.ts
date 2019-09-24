@@ -1,4 +1,5 @@
 import { Point, Vector } from '~src/geometry/geometry'
+import { swapArrayElements } from '~src/utils'
 
 export function vectorBetween(point1: Point, point2: Point): Vector {
   return new Vector(
@@ -20,6 +21,15 @@ export function cross(vector1: Vector, vector2: Vector): Vector {
   )
 }
 
-export function discriminant(a: number, b: number, c: number): number {
-  return b ** 2 - 4 * a * c
+export function quadratic(a: number, b: number, c: number): number[] {
+  const solutions: number[] = []
+
+  const discriminant = b ** 2 - 4 * a * c
+  if (discriminant >= 0) {
+    solutions.push((-b - Math.sqrt(discriminant)) / (2 * a))
+    solutions.push((-b + Math.sqrt(discriminant)) / (2 * a))
+    if (solutions[0] > solutions[1]) swapArrayElements(solutions, 0, 1)
+  }
+
+  return solutions
 }
