@@ -10,6 +10,15 @@ function intersection(t: number, object: TShape): IIntersection {
   return { t, object }
 }
 
+export function hit(intersections: IIntersection[]): IIntersection | undefined {
+  let hit: IIntersection | undefined
+  intersections.forEach(intersection => {
+    if (intersection.t >= 0 && (hit === undefined || intersection.t < hit.t))
+      hit = intersection
+  })
+  return hit
+}
+
 export class Sphere {
   intersect(ray: Ray): IIntersection[] {
     const a = ray.direction.x ** 2 + ray.direction.y ** 2 + ray.direction.z ** 2

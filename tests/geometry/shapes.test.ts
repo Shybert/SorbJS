@@ -1,6 +1,40 @@
-import { Sphere } from '~src/geometry/shapes'
+import { Sphere, hit } from '~src/geometry/shapes'
 import { Ray } from '~src/geometry/ray'
 import { Point, Vector } from '~src/geometry/geometry'
+import { swapArrayElements } from '~src/utils'
+
+describe('hit', () => {
+  describe('Should always return the closest non-negative intersection', () => {
+    test('All intersections have a positive t value', () => {
+      const sphere = new Sphere()
+      const ray = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1))
+      const intersections = sphere.intersect(ray)
+      expect(hit(intersections)).toBe(intersections[0])
+    })
+
+    test('Some intersections have a negative t value', () => {
+      const sphere = new Sphere()
+      const ray = new Ray(new Point(0, 0, 0), new Vector(0, 0, 1))
+      const intersections = sphere.intersect(ray)
+      expect(hit(intersections)).toBe(intersections[1])
+    })
+
+    test('All intersections have a negative t value', () => {
+      const sphere = new Sphere()
+      const ray = new Ray(new Point(0, 0, 5), new Vector(0, 0, 1))
+      const intersections = sphere.intersect(ray)
+      expect(hit(intersections)).toBeUndefined()
+    })
+
+    test("The intersection order doesn't matter", () => {
+      const sphere = new Sphere()
+      const ray = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1))
+      const intersections = sphere.intersect(ray)
+      swapArrayElements(intersections, 0, 1)
+      expect(hit(intersections)).toBe(intersections[1])
+    })
+  })
+})
 
 describe('Sphere', () => {
   describe('intersect', () => {
