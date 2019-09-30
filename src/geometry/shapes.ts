@@ -1,5 +1,6 @@
 import { Ray } from './ray'
 import { quadratic } from './math'
+import { Transform } from './transform'
 
 type TShape = Sphere
 interface IIntersection {
@@ -20,6 +21,8 @@ export function hit(intersections: IIntersection[]): IIntersection | undefined {
 }
 
 export class Sphere {
+  transform: Transform = new Transform()
+
   intersect(ray: Ray): IIntersection[] {
     const a = ray.direction.x ** 2 + ray.direction.y ** 2 + ray.direction.z ** 2
     const b =

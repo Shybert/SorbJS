@@ -2,6 +2,7 @@ import { Sphere, hit } from '~src/geometry/shapes'
 import { Ray } from '~src/geometry/ray'
 import { Point, Vector } from '~src/geometry/geometry'
 import { swapArrayElements } from '~src/utils'
+import { Transform } from '~src/geometry/transform'
 
 describe('hit', () => {
   describe('Should always return the closest non-negative intersection', () => {
@@ -37,6 +38,18 @@ describe('hit', () => {
 })
 
 describe('Sphere', () => {
+  describe('transform', () => {
+    test('Has a transform', () => {
+      const sphere = new Sphere()
+      expect(sphere.transform).toBeInstanceOf(Transform)
+    })
+
+    test('Initializes to the default transform', () => {
+      const sphere = new Sphere()
+      expect(sphere.transform).toEqualTransform(new Transform())
+    })
+  })
+
   describe('intersect', () => {
     test('Intersecting at two points', () => {
       const sphere = new Sphere()
