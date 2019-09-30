@@ -1,5 +1,6 @@
 import { Transform } from '~src/geometry/transform'
 import { Matrix, Point, Vector } from '~src/geometry/geometry'
+import { Ray } from '~src/geometry/ray'
 
 describe('Transform', () => {
   test('Should initialize to the identity transformation by default', () => {
@@ -488,6 +489,133 @@ describe('Transform', () => {
 
       expect(composition.transformVector(vector)).toEqualVector(
         new Vector(-5, -5, 0)
+      )
+    })
+  })
+
+  describe('transformRay', () => {
+    test('Translations should only move the origin', () => {
+      const ray = new Ray(new Point(1, 2, 3), new Vector(0, 1, 0))
+      const translation = new Transform().translate(3, 4, 5)
+
+      expect(translation.transformRay(ray)).toEqualRay(
+        new Ray(new Point(4, 6, 8), new Vector(0, 1, 0))
+      )
+    })
+
+    describe('scale', () => {
+      test('Should let you scale a ray', () => {
+        const ray = new Ray(new Point(1, 2, 3), new Vector(0, 1, 0))
+        const scale = new Transform().scale(2, 3, 4)
+
+        expect(scale.transformRay(ray)).toEqualRay(
+          new Ray(new Point(2, 6, 12), new Vector(0, 3, 0))
+        )
+      })
+
+      test('Should let you reflect a ray by scaling by negative values', () => {
+        const ray = new Ray(new Point(1, 2, 3), new Vector(0, 1, 0))
+        const scale = new Transform().scale(-1, -1, -1)
+
+        expect(scale.transformRay(ray)).toEqualRay(
+          new Ray(new Point(-1, -2, -3), new Vector(0, -1, 0))
+        )
+      })
+    })
+
+    test('Should let you rotate a ray around the x-axis', () => {
+      const ray = new Ray(new Point(0, 0, 5), new Vector(0, 1, 0))
+      const rotation = new Transform().rotateX(Math.PI / 2)
+
+      expect(rotation.transformRay(ray)).toEqualRay(
+        new Ray(new Point(0, -5, 0), new Vector(0, 0, 1))
+      )
+    })
+
+    test('Should let you rotate a ray around the y-axis', () => {
+      const ray = new Ray(new Point(0, 0, 5), new Vector(1, 0, 0))
+      const rotation = new Transform().rotateY(Math.PI / 2)
+
+      expect(rotation.transformRay(ray)).toEqualRay(
+        new Ray(new Point(5, 0, 0), new Vector(0, 0, -1))
+      )
+    })
+
+    test('Should let you rotate a ray around the z-axis', () => {
+      const ray = new Ray(new Point(0, 5, 0), new Vector(1, 0, 0))
+      const rotation = new Transform().rotateZ(Math.PI / 2)
+
+      expect(rotation.transformRay(ray)).toEqualRay(
+        new Ray(new Point(-5, 0, 0), new Vector(0, 1, 0))
+      )
+    })
+
+    describe('shear', () => {
+      test('Should let you move x in proportion to y', () => {
+        const ray = new Ray(new Point(1, 2, 3), new Vector(3, 2, 1))
+        const shear = new Transform().shear({ xy: 1 })
+
+        expect(shear.transformRay(ray)).toEqualRay(
+          new Ray(new Point(3, 2, 3), new Vector(5, 2, 1))
+        )
+      })
+
+      test('Should let you move x in proportion to z', () => {
+        const ray = new Ray(new Point(1, 2, 3), new Vector(3, 2, 1))
+        const shear = new Transform().shear({ xz: 1 })
+
+        expect(shear.transformRay(ray)).toEqualRay(
+          new Ray(new Point(4, 2, 3), new Vector(4, 2, 1))
+        )
+      })
+
+      test('Should let you move y in proportion to x', () => {
+        const ray = new Ray(new Point(1, 2, 3), new Vector(3, 2, 1))
+        const shear = new Transform().shear({ yx: 1 })
+
+        expect(shear.transformRay(ray)).toEqualRay(
+          new Ray(new Point(1, 3, 3), new Vector(3, 5, 1))
+        )
+      })
+
+      test('Should let you move y in proportion to z', () => {
+        const ray = new Ray(new Point(1, 2, 3), new Vector(3, 2, 1))
+        const shear = new Transform().shear({ yz: 1 })
+
+        expect(shear.transformRay(ray)).toEqualRay(
+          new Ray(new Point(1, 5, 3), new Vector(3, 3, 1))
+        )
+      })
+
+      test('Should let you move z in proportion to x', () => {
+        const ray = new Ray(new Point(1, 2, 3), new Vector(3, 2, 1))
+        const shear = new Transform().shear({ zx: 1 })
+
+        expect(shear.transformRay(ray)).toEqualRay(
+          new Ray(new Point(1, 2, 4), new Vector(3, 2, 4))
+        )
+      })
+
+      test('Should let you move z in proportion to y', () => {
+        const ray = new Ray(new Point(1, 2, 3), new Vector(3, 2, 1))
+        const shear = new Transform().shear({ zy: 1 })
+
+        expect(shear.transformRay(ray)).toEqualRay(
+          new Ray(new Point(1, 2, 5), new Vector(3, 2, 3))
+        )
+      })
+    })
+
+    test('Should work with a composited transformation', () => {
+      const ray = new Ray(new Point(0, 0, 5), new Vector(0, 0, 1))
+      const composition = new Transform()
+        .rotateX(Math.PI / 2)
+        .scale(5, 5, 5)
+        .shear({ xy: 2 })
+        .translate(-25, 10, 0)
+
+      expect(composition.transformRay(ray)).toEqualRay(
+        new Ray(new Point(-75, -15, 0), new Vector(-10, -5, 0))
       )
     })
   })

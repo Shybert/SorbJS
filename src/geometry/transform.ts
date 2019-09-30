@@ -1,4 +1,5 @@
 import { Matrix, Point, Vector } from './geometry'
+import { Ray } from './ray'
 
 interface IShear {
   xy?: number
@@ -104,5 +105,12 @@ export class Transform {
 
   transformVector(vector: Vector): Vector {
     return this.matrix.multiplyVector(vector)
+  }
+
+  transformRay(ray: Ray): Ray {
+    return new Ray(
+      this.transformPoint(ray.origin),
+      this.transformVector(ray.direction)
+    )
   }
 }
