@@ -98,11 +98,11 @@ export class Transform {
     return this
   }
 
-  transformPoint(point: Point): void {
-    point.set(this.matrix.multiplyPoint(point))
+  transformPoint(point: Point): Point {
+    return this.matrix.multiplyPoint(point)
   }
 
-  transformVector(vector: Vector): void {
-    vector.set(this.matrix.multiplyVector(vector))
+  transformVector(vector: Vector): Vector {
+    return this.matrix.multiplyVector(vector)
   }
 }

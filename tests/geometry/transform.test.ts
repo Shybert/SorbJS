@@ -281,8 +281,7 @@ describe('Transform', () => {
       const point = new Point(-3, 4, 5)
       const translation = new Transform().translate(5, -3, 2)
 
-      translation.transformPoint(point)
-      expect(point).toEqualPoint(new Point(2, 1, 7))
+      expect(translation.transformPoint(point)).toEqualPoint(new Point(2, 1, 7))
     })
 
     describe('scale', () => {
@@ -290,16 +289,14 @@ describe('Transform', () => {
         const point = new Point(-3, 4, 5)
         const scale = new Transform().scale(1, 2, 3)
 
-        scale.transformPoint(point)
-        expect(point).toEqualPoint(new Point(-3, 8, 15))
+        expect(scale.transformPoint(point)).toEqualPoint(new Point(-3, 8, 15))
       })
 
       test('Should let you reflect a point by scaling by negative values', () => {
         const point = new Point(-3, 4, 5)
         const scale = new Transform().scale(-1, -1, -1)
 
-        scale.transformPoint(point)
-        expect(point).toEqualPoint(new Point(3, -4, -5))
+        expect(scale.transformPoint(point)).toEqualPoint(new Point(3, -4, -5))
       })
     })
 
@@ -307,24 +304,21 @@ describe('Transform', () => {
       const point = new Point(0, 1, 0)
       const rotation = new Transform().rotateX(Math.PI / 2)
 
-      rotation.transformPoint(point)
-      expect(point).toEqualPoint(new Point(0, 0, 1))
+      expect(rotation.transformPoint(point)).toEqualPoint(new Point(0, 0, 1))
     })
 
     test('Should let you rotate a point around the y-axis', () => {
       const point = new Point(1, 0, 0)
       const rotation = new Transform().rotateY(Math.PI / 2)
 
-      rotation.transformPoint(point)
-      expect(point).toEqualPoint(new Point(0, 0, -1))
+      expect(rotation.transformPoint(point)).toEqualPoint(new Point(0, 0, -1))
     })
 
     test('Should let you rotate a point around the z-axis', () => {
       const point = new Point(0, 1, 0)
       const rotation = new Transform().rotateZ(Math.PI / 2)
 
-      rotation.transformPoint(point)
-      expect(point).toEqualPoint(new Point(-1, 0, 0))
+      expect(rotation.transformPoint(point)).toEqualPoint(new Point(-1, 0, 0))
     })
 
     describe('shear', () => {
@@ -332,48 +326,42 @@ describe('Transform', () => {
         const point = new Point(2, 3, 4)
         const shear = new Transform().shear({ xy: 1 })
 
-        shear.transformPoint(point)
-        expect(point).toEqualPoint(new Point(5, 3, 4))
+        expect(shear.transformPoint(point)).toEqualPoint(new Point(5, 3, 4))
       })
 
       test('Should let you move x in proportion to z', () => {
         const point = new Point(2, 3, 4)
         const shear = new Transform().shear({ xz: 1 })
 
-        shear.transformPoint(point)
-        expect(point).toEqualPoint(new Point(6, 3, 4))
+        expect(shear.transformPoint(point)).toEqualPoint(new Point(6, 3, 4))
       })
 
       test('Should let you move y in proportion to x', () => {
         const point = new Point(2, 3, 4)
         const shear = new Transform().shear({ yx: 1 })
 
-        shear.transformPoint(point)
-        expect(point).toEqualPoint(new Point(2, 5, 4))
+        expect(shear.transformPoint(point)).toEqualPoint(new Point(2, 5, 4))
       })
 
       test('Should let you move y in proportion to z', () => {
         const point = new Point(2, 3, 4)
         const shear = new Transform().shear({ yz: 1 })
 
-        shear.transformPoint(point)
-        expect(point).toEqualPoint(new Point(2, 7, 4))
+        expect(shear.transformPoint(point)).toEqualPoint(new Point(2, 7, 4))
       })
 
       test('Should let you move z in proportion to x', () => {
         const point = new Point(2, 3, 4)
         const shear = new Transform().shear({ zx: 1 })
 
-        shear.transformPoint(point)
-        expect(point).toEqualPoint(new Point(2, 3, 6))
+        expect(shear.transformPoint(point)).toEqualPoint(new Point(2, 3, 6))
       })
 
       test('Should let you move z in proportion to y', () => {
         const point = new Point(2, 3, 4)
         const shear = new Transform().shear({ zy: 1 })
 
-        shear.transformPoint(point)
-        expect(point).toEqualPoint(new Point(2, 3, 7))
+        expect(shear.transformPoint(point)).toEqualPoint(new Point(2, 3, 7))
       })
     })
 
@@ -384,8 +372,9 @@ describe('Transform', () => {
         .scale(5, 5, 5)
         .translate(10, 5, 7)
 
-      compositedTransform.transformPoint(point)
-      expect(point).toEqualPoint(new Point(15, 0, 7))
+      expect(compositedTransform.transformPoint(point)).toEqualPoint(
+        new Point(15, 0, 7)
+      )
     })
   })
 
@@ -394,8 +383,9 @@ describe('Transform', () => {
       const vector = new Vector(-3, 4, 5)
       const translation = new Transform().translate(5, -3, 2)
 
-      translation.transformVector(vector)
-      expect(vector).toEqualVector(new Vector(-3, 4, 5))
+      expect(translation.transformVector(vector)).toEqualVector(
+        new Vector(-3, 4, 5)
+      )
     })
 
     describe('scale', () => {
@@ -403,16 +393,18 @@ describe('Transform', () => {
         const vector = new Vector(-3, 4, 5)
         const scale = new Transform().scale(1, 2, 3)
 
-        scale.transformVector(vector)
-        expect(vector).toEqualVector(new Vector(-3, 8, 15))
+        expect(scale.transformVector(vector)).toEqualVector(
+          new Vector(-3, 8, 15)
+        )
       })
 
       test('Should let you reflect a vector by scaling by negative values', () => {
         const vector = new Vector(-3, 4, 5)
         const scale = new Transform().scale(-1, -1, -1)
 
-        scale.transformVector(vector)
-        expect(vector).toEqualVector(new Vector(3, -4, -5))
+        expect(scale.transformVector(vector)).toEqualVector(
+          new Vector(3, -4, -5)
+        )
       })
     })
 
@@ -420,24 +412,27 @@ describe('Transform', () => {
       const vector = new Vector(0, 1, 0)
       const rotation = new Transform().rotateX(Math.PI / 2)
 
-      rotation.transformVector(vector)
-      expect(vector).toEqualVector(new Vector(0, 0, 1))
+      expect(rotation.transformVector(vector)).toEqualVector(
+        new Vector(0, 0, 1)
+      )
     })
 
     test('Should let you rotate a vector around the y-axis', () => {
       const vector = new Vector(1, 0, 0)
       const rotation = new Transform().rotateY(Math.PI / 2)
 
-      rotation.transformVector(vector)
-      expect(vector).toEqualVector(new Vector(0, 0, -1))
+      expect(rotation.transformVector(vector)).toEqualVector(
+        new Vector(0, 0, -1)
+      )
     })
 
     test('Should let you rotate a vector around the z-axis', () => {
       const vector = new Vector(0, 1, 0)
       const rotation = new Transform().rotateZ(Math.PI / 2)
 
-      rotation.transformVector(vector)
-      expect(vector).toEqualVector(new Vector(-1, 0, 0))
+      expect(rotation.transformVector(vector)).toEqualVector(
+        new Vector(-1, 0, 0)
+      )
     })
 
     describe('shear', () => {
@@ -445,48 +440,42 @@ describe('Transform', () => {
         const vector = new Vector(2, 3, 4)
         const shear = new Transform().shear({ xy: 1 })
 
-        shear.transformVector(vector)
-        expect(vector).toEqualVector(new Vector(5, 3, 4))
+        expect(shear.transformVector(vector)).toEqualVector(new Vector(5, 3, 4))
       })
 
       test('Should let you move x in proportion to z', () => {
         const vector = new Vector(2, 3, 4)
         const shear = new Transform().shear({ xz: 1 })
 
-        shear.transformVector(vector)
-        expect(vector).toEqualVector(new Vector(6, 3, 4))
+        expect(shear.transformVector(vector)).toEqualVector(new Vector(6, 3, 4))
       })
 
       test('Should let you move y in proportion to x', () => {
         const vector = new Vector(2, 3, 4)
         const shear = new Transform().shear({ yx: 1 })
 
-        shear.transformVector(vector)
-        expect(vector).toEqualVector(new Vector(2, 5, 4))
+        expect(shear.transformVector(vector)).toEqualVector(new Vector(2, 5, 4))
       })
 
       test('Should let you move y in proportion to z', () => {
         const vector = new Vector(2, 3, 4)
         const shear = new Transform().shear({ yz: 1 })
 
-        shear.transformVector(vector)
-        expect(vector).toEqualVector(new Vector(2, 7, 4))
+        expect(shear.transformVector(vector)).toEqualVector(new Vector(2, 7, 4))
       })
 
       test('Should let you move z in proportion to x', () => {
         const vector = new Vector(2, 3, 4)
         const shear = new Transform().shear({ zx: 1 })
 
-        shear.transformVector(vector)
-        expect(vector).toEqualVector(new Vector(2, 3, 6))
+        expect(shear.transformVector(vector)).toEqualVector(new Vector(2, 3, 6))
       })
 
       test('Should let you move z in proportion to y', () => {
         const vector = new Vector(2, 3, 4)
         const shear = new Transform().shear({ zy: 1 })
 
-        shear.transformVector(vector)
-        expect(vector).toEqualVector(new Vector(2, 3, 7))
+        expect(shear.transformVector(vector)).toEqualVector(new Vector(2, 3, 7))
       })
     })
 
@@ -497,8 +486,9 @@ describe('Transform', () => {
         .scale(5, 5, 5)
         .shear({ xy: 2 })
 
-      compositedTransform.transformVector(vector)
-      expect(vector).toEqualVector(new Vector(-5, -5, 0))
+      expect(compositedTransform.transformVector(vector)).toEqualVector(
+        new Vector(-5, -5, 0)
+      )
     })
   })
 })
