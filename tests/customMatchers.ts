@@ -1,6 +1,7 @@
 import { Vector, Point, Matrix } from '~src/geometry/geometry'
 import { Transform } from '~src/geometry/transform'
 import { Color } from '~src/canvas'
+import { Ray } from '~src/geometry/ray'
 
 declare global {
   namespace jest {
@@ -9,6 +10,7 @@ declare global {
       toEqualVector(vector: Vector): R
       toEqualMatrix(matrix: Matrix): R
       toEqualTransform(transform: Transform): R
+      toEqualRay(ray: Ray): R
       toEqualColor(color: Color): R
     }
   }
@@ -45,6 +47,25 @@ expect.extend({
         `expected ${received.toText()} to${
           pass ? ' not ' : ' '
         }equal ${vector.toText()}`,
+      pass
+    }
+  },
+
+  toEqualRay(received, ray: Ray) {
+    if (!(received instanceof Ray))
+      return {
+        message: () => `expected ${received} to be a ray`,
+        pass: false
+      }
+
+    const pass =
+      received.origin.equals(ray.origin) &&
+      received.direction.equals(ray.direction)
+    return {
+      message: () =>
+        `expected origin ${received.origin.toText()} and direction ${received.direction.toText()} to${
+          pass ? ' not ' : ' '
+        }equal origin ${ray.origin.toText()} and direction ${ray.direction.toText()}`,
       pass
     }
   },
