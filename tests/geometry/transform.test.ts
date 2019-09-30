@@ -265,7 +265,7 @@ describe('Transform', () => {
 
   test('Should support compositing transformations', () => {
     const transform = new Transform()
-    const compositedTransform = new Transform(
+    const composition = new Transform(
       new Matrix([[5, 0, 0, 10], [0, 0, -5, 5], [0, 5, 0, 7], [0, 0, 0, 1]])
     )
 
@@ -273,7 +273,7 @@ describe('Transform', () => {
       .rotateX(Math.PI / 2)
       .scale(5, 5, 5)
       .translate(10, 5, 7)
-    expect(transform).toEqualTransform(compositedTransform)
+    expect(transform).toEqualTransform(composition)
   })
 
   describe('transformPoint', () => {
@@ -365,14 +365,14 @@ describe('Transform', () => {
       })
     })
 
-    test('Should work with a composited transformation', () => {
+    test('Should work with a composition', () => {
       const point = new Point(1, 0, 1)
-      const compositedTransform = new Transform()
+      const composition = new Transform()
         .rotateX(Math.PI / 2)
         .scale(5, 5, 5)
         .translate(10, 5, 7)
 
-      expect(compositedTransform.transformPoint(point)).toEqualPoint(
+      expect(composition.transformPoint(point)).toEqualPoint(
         new Point(15, 0, 7)
       )
     })
@@ -479,14 +479,14 @@ describe('Transform', () => {
       })
     })
 
-    test('Should work with a composited transformation', () => {
+    test('Should work with a composition', () => {
       const vector = new Vector(1, 0, 1)
-      const compositedTransform = new Transform()
+      const composition = new Transform()
         .rotateX(Math.PI / 2)
         .scale(5, 5, 5)
         .shear({ xy: 2 })
 
-      expect(compositedTransform.transformVector(vector)).toEqualVector(
+      expect(composition.transformVector(vector)).toEqualVector(
         new Vector(-5, -5, 0)
       )
     })
