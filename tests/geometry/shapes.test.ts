@@ -54,6 +54,7 @@ describe('Sphere', () => {
     test('Intersecting at two points', () => {
       const sphere = new Sphere()
       const ray = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1))
+
       const intersections = sphere.intersect(ray)
       expect(intersections.length).toBe(2)
       expect(intersections[0].t).toBeCloseTo(4)
@@ -63,6 +64,7 @@ describe('Sphere', () => {
     test('Intersecting at a tangent', () => {
       const sphere = new Sphere()
       const ray = new Ray(new Point(0, 1, -5), new Vector(0, 0, 1))
+
       const intersections = sphere.intersect(ray)
       expect(intersections.length).toBe(2)
       expect(intersections[0].t).toBeCloseTo(5)
@@ -72,6 +74,7 @@ describe('Sphere', () => {
     test('No intersections', () => {
       const sphere = new Sphere()
       const ray = new Ray(new Point(0, 2, -5), new Vector(0, 0, 1))
+
       const intersections = sphere.intersect(ray)
       expect(intersections.length).toBe(0)
     })
@@ -79,6 +82,7 @@ describe('Sphere', () => {
     test('Intersecting both behind and in front of the origin', () => {
       const sphere = new Sphere()
       const ray = new Ray(new Point(0, 0, 0), new Vector(0, 0, 1))
+
       const intersections = sphere.intersect(ray)
       expect(intersections.length).toBe(2)
       expect(intersections[0].t).toBeCloseTo(-1)
@@ -88,6 +92,7 @@ describe('Sphere', () => {
     test('Both intersections behind the origin', () => {
       const sphere = new Sphere()
       const ray = new Ray(new Point(0, 0, 5), new Vector(0, 0, 1))
+
       const intersections = sphere.intersect(ray)
       expect(intersections.length).toBe(2)
       expect(intersections[0].t).toBeCloseTo(-6)
@@ -97,10 +102,33 @@ describe('Sphere', () => {
     test('Returns the intersected object', () => {
       const sphere = new Sphere()
       const ray = new Ray(new Point(0, 0, -5), new Vector(0, 0, 1))
+
       const intersections = sphere.intersect(ray)
       expect(intersections.length).toBe(2)
       expect(intersections[0].object).toBe(sphere)
       expect(intersections[1].object).toBe(sphere)
+    })
+
+    test('Intersecting a translated sphere', () => {
+      const sphere = new Sphere()
+      sphere.transform.translate(5, 0, 0)
+      const ray = new Ray(new Point(5, 0, -5), new Vector(0, 0, 1))
+
+      const intersections = sphere.intersect(ray)
+      expect(intersections.length).toBe(2)
+      expect(intersections[0].t).toBe(4)
+      expect(intersections[1].t).toBe(6)
+    })
+
+    test('Intersecting a scaled sphere', () => {
+      const sphere = new Sphere()
+      sphere.transform.scale(2, 2, 2)
+      const ray = new Ray(new Point(0, 0, -1), new Vector(0, 0, 1))
+
+      const intersections = sphere.intersect(ray)
+      expect(intersections.length).toBe(2)
+      expect(intersections[0].t).toBe(-1)
+      expect(intersections[1].t).toBe(3)
     })
   })
 })

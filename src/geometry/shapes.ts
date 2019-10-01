@@ -24,13 +24,22 @@ export class Sphere {
   transform: Transform = new Transform()
 
   intersect(ray: Ray): IIntersection[] {
-    const a = ray.direction.x ** 2 + ray.direction.y ** 2 + ray.direction.z ** 2
+    const transformedRay = this.transform.inverse().transformRay(ray)
+
+    const a =
+      transformedRay.direction.x ** 2 +
+      transformedRay.direction.y ** 2 +
+      transformedRay.direction.z ** 2
     const b =
       2 *
-      (ray.direction.x * ray.origin.x +
-        ray.direction.y * ray.origin.y +
-        ray.direction.z * ray.origin.z)
-    const c = ray.origin.x ** 2 + ray.origin.y ** 2 + ray.origin.z ** 2 - 1
+      (transformedRay.direction.x * transformedRay.origin.x +
+        transformedRay.direction.y * transformedRay.origin.y +
+        transformedRay.direction.z * transformedRay.origin.z)
+    const c =
+      transformedRay.origin.x ** 2 +
+      transformedRay.origin.y ** 2 +
+      transformedRay.origin.z ** 2 -
+      1
 
     return quadratic(a, b, c).map(t => intersection(t, this))
   }
