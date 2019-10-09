@@ -1,4 +1,4 @@
-import { Canvas, renderCanvas, Color } from '~src/canvas'
+import { Canvas, outputCanvas, Color } from '~src/canvas'
 import { Point } from '~src/geometry/geometry'
 import { Transform } from '~src/geometry/transform'
 
@@ -15,4 +15,4 @@ for (let i = 0; i < 13; i += 1) {
   canvas.setPixel(point.x, point.y, new Color(255, 255, 255))
 }
 
-renderCanvas(canvas, document.getElementById('canvas') as HTMLCanvasElement)
+outputCanvas(canvas, document.getElementById('canvas') as HTMLCanvasElement)

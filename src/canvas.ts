@@ -49,7 +49,7 @@ export class Canvas {
   }
 }
 
-export function renderCanvas(canvas: Canvas, element: HTMLCanvasElement): void {
+export function outputCanvas(canvas: Canvas, element: HTMLCanvasElement): void {
   const ctx = element.getContext('2d') as CanvasRenderingContext2D
   element.width = canvas.width
   element.height = canvas.height
