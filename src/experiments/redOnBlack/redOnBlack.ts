@@ -16,7 +16,7 @@ class Camera {
     this.fov = fov
   }
 
-  render(sphere: Sphere): void {
+  render(spheres: Sphere[]): void {
     for (let i = 0; i <= this.canvas.width; i += 1) {
       for (let j = 0; j <= this.canvas.height; j += 1) {
         const computedFov = Math.tan(this.fov / 2)
@@ -27,7 +27,7 @@ class Camera {
         const y = (1 - 2 * ((j + 0.5) / this.canvas.height)) * computedFov
         const ray = new Ray(new Point(0, 0, 0), new Vector(x, y, 1))
 
-        const intersections = sphere.intersect(ray)
+        const intersections = spheres.flatMap(sphere => sphere.intersect(ray))
         const rayHit = hit(intersections)
         this.canvas.setPixel(i, j, rayHit ? red : black)
       }
@@ -37,8 +37,14 @@ class Camera {
 
 const sphere = new Sphere()
 sphere.transform.translate(0, 0, 2)
+const cornerSphere = new Sphere()
+cornerSphere.transform.translate(3, 3, 2)
+const shearedSphere = new Sphere()
+shearedSphere.transform.translate(0, 0, 2).shear({ xy: 1 })
+
 const camera = new Camera(600, 600, Math.PI / 2)
-camera.render(sphere)
-outputCanvas(camera.canvas, document.getElementById(
-  'canvas'
-) as HTMLCanvasElement)
+camera.render([sphere, cornerSphere, shearedSphere])
+outputCanvas(
+  camera.canvas,
+  document.getElementById('canvas') as HTMLCanvasElement
+)
